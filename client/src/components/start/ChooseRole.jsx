@@ -16,7 +16,7 @@ export const ChooseRole = () => {
         </div>
 
         <div className="form-box">
-          <label>Wähle deine Rolle?</label>
+          <label>Wähle deine Rolle</label>
           <button onClick={() => handleChoose("Polizei")}>Polizei</button>
           <button onClick={() => handleChoose("Räuber")}>Räuber</button>
         </div>
