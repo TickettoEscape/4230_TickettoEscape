@@ -230,10 +230,27 @@ button:hover {
 
 .popup-content input {
   padding: 10px;
-  border: 2px solid #b20000;
+  border: 2px solid #011432;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
+}
+.popup-content label {
+  color: #b20000;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: -10px;
+}
+
+.popup-content button {
+  background-color: #b20000;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-top: 20px;
+  max-width: 150px;
 }

@@ -45,8 +45,8 @@ export const ChooseRole = () => {
             <div className="popup-header">
               <span onClick={() => setPopupVisible(false)} className="close-button">✕</span>
             </div>
-            <h2>Gruppen Name</h2>
-            <input className="button"
+            <label>Gruppen Name</label>
+            <input
               type="text"
               placeholder="Gruppen Name"
               value={groupName}
