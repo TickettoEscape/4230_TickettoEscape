@@ -7,7 +7,7 @@ export const Rules = () => {
   const [popupContent, setPopupContent] = useState(null);
 
   const rules = [
-    { key: "allgemein", title: "🎯 Allgemeines", content: "Gelingt es den Räuber auf dem SBB-Netz der Schweiz vor Ablauf der Zeit zu fliehen, so verhinderen die Polizisten dass die Räuber ihr Ticket to Escape lösen können." },
+    { key: "allgemein", title: "🎯 Allgemeines", content: "Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape." },
     { key: "teilnehmer", title: "🧑‍🤝‍🧑 Teilnehmer & Gruppen", content: "1 Räubergruppe & 2-7 Polizistengruppen. Empfehlung: 2-5 Spieler pro Gruppe." },
     { key: "start", title: "🚦 Spielstart", content: "Die Räuber starten mit 30 Minuten Vorsprung an einem selbstgewählten Bahnhof." },
     { key: "ablauf", title: "🔄 Spielablauf", content: "• Räuber melden beim Aussteigen den Bahnhof\n• Alle 30 Minuten: Standort & Linienbezeichnung\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben" },

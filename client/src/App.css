@@ -1,6 +1,9 @@
 /* =========================== 
    Global Page Layout 
 =========================== */
+body {
+  font-family: helvetica;
+}
 .page {
   min-height: 100vh;
   background-color: #011432;
