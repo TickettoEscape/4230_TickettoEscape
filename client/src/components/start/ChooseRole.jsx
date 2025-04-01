@@ -21,7 +21,7 @@ export const ChooseRole = () => {
       return;
     }
     localStorage.setItem("groupName", groupName);
-    console.log("✅ Gruppenname gespeichert:", groupName);
+    console.log("Gruppenname gespeichert:", groupName);
     navigate("/waiting");
   };
 

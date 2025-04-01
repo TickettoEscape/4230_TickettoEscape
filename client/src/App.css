@@ -191,7 +191,7 @@ button:hover {
   width: 90%;
   max-width: 300px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
+  /* text-align: center; */
   position: relative;
 }
 
@@ -239,7 +239,10 @@ button:hover {
   outline: none;
   width: 100%;
   box-sizing: border-box;
+  text-align: left;
+  margin-top: 4px;
 }
+
 .popup-content label {
   color: #b20000;
   font-weight: 500;
@@ -254,6 +257,11 @@ button:hover {
   color: white;
   font-size: 16px;
   border-radius: 8px;
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
   max-width: 150px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  text-align: center;
 }
