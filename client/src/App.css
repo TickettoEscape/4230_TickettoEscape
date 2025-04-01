@@ -1,5 +1,5 @@
-/* ===========================
-   Global Page Layout
+/* =========================== 
+   Global Page Layout 
 =========================== */
 .page {
   min-height: 100vh;
@@ -9,8 +9,8 @@
   align-items: center;
 }
 
-/* ===========================
-   Card Layout
+/* =========================== 
+   Card Layout 
 =========================== */
 .card {
   background-color: #011432;
@@ -21,8 +21,8 @@
   align-items: center;
 }
 
-/* ===========================
-   Logo Styling
+/* =========================== 
+   Logo Styling 
 =========================== */
 .logo-container {
   width: 100%;
@@ -37,22 +37,22 @@
   display: block;
 }
 
-/* ===========================
-   Form & Button Container
+/* =========================== 
+   Form & Button Container 
 =========================== */
 .button-container,
 .form-box {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: stretch; /* macht alle Kinder gleich breit */
+  align-items: stretch;
   width: 100%;
   max-width: 250px;
   box-sizing: border-box;
 }
 
-/* ===========================
-   Buttons allgemein
+/* =========================== 
+   Buttons allgemein 
 =========================== */
 button {
   background-color: white;
@@ -73,7 +73,7 @@ button:hover {
   background-color: #f0f0f0;
 }
 
-/* Red Variant (z. B. in Join/Create) */
+/* Red Variant */
 .form-box button {
   background-color: #b20000;
   color: white;
@@ -86,15 +86,20 @@ button:hover {
   background-color: #a00000;
 }
 
-/* ===========================
-   Form Elements
+/* =========================== 
+   Form Elements 
 =========================== */
 .form-box {
   background-color: white;
+  flex-direction: column;
   padding: 20px;
-  max-width: 80%;
+  max-width:300px;
+  min-width:300px;
   border-radius: 10px;
-  gap:12px
+  gap:12px;
+  display: flex;
+  position: relative; /* <<< wichtig für X oben rechts */
+  box-sizing: border-box;
 }
 
 .form-box label {
@@ -108,7 +113,7 @@ button:hover {
 
 .form-box input {
   padding: 10px;
-  border: 2px solid #011432;
+  border: 2px solid #b20000;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -119,6 +124,7 @@ button:hover {
 .form-box input::placeholder {
   color: #ccc;
 }
+
 .form-box h3 {
   color: #b20000;
   font-size: 18px;
@@ -127,14 +133,94 @@ button:hover {
   margin: 8px 0;
 }
 
-/* Inhalt der Accordion-Abschnitte */
-.form-box p, .form-box li, {
+.form-box p, .form-box li {
   color: #b20000;
   font-size: 14px;
 }
-
-.card h1{
+.form-box h1 {
   color: #b20000;
-  font-size: 24px;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
+/* ================
+   Seiten-X oben rechts 
+================ */
+.close-top-right {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #b20000;
+  user-select: none;
+}
+
+.close-top-right:hover {
+  color: #a00000;
+}
+
+/* =========================== 
+   Popup Fenster 
+=========================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+/* --------------------- 
+   X Button im Popup 
+---------------------- */
+.popup-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  font-size: 20px;
+  cursor: pointer;
+  color: #b20000;
+  user-select: none;
+}
+
+.close-button:hover {
+  color: #a00000;
+}
+
+/* --------------------- 
+   Popup Text 
+---------------------- */
+.popup-content h2 {
+  color: #b20000;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.popup-content pre {
+  text-align: left;
+  white-space: pre-wrap;
+  color: #011432;
+  font-size: 14px;
+  margin-top: 10px;
+}
