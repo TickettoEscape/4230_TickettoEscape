@@ -265,3 +265,44 @@ button:hover {
   display: block;
   text-align: center;
 }
+
+
+/* ========================
+   Waiting Room Styles
+======================== */
+.waiting-message {
+  color: #b20000;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.waiting-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.waiting-table th {
+  background-color: #b20000;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.waiting-table td {
+  background-color: #f0f0f0;
+  color: #011432;
+  padding: 5px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.waiting-table tr:nth-child(even) td {
+  background-color: #e8e8e8;
+}

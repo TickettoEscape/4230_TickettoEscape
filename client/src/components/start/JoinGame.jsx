@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
-export const JoinGame = ({ gameId, setGameId }) => {
+export const JoinGame = () => {
   const navigate = useNavigate();
-
+    const [gameId, setGameId] = useState("");
 
   const handleJoin = () => {
     localStorage.setItem("gameId",gameId)
