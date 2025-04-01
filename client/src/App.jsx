@@ -5,6 +5,7 @@ import { StartScreen } from "./components/start/StartScreen"
 import { JoinGame } from "./components/start/JoinGame"
 import { CreateGame } from "./components/start/CreateGame"
 import { ChooseRole } from "./components/start/ChooseRole";
+import { Rules} from "./components/start/Rules";
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         }
       />
       <Route path="/role" element={<ChooseRole />} />
+      <Route path="/rules" element={<Rules />} />
+
   </Routes>
 );
 

@@ -108,3 +108,22 @@ button:hover {
 .form-box input::placeholder {
   color: #ccc;
 }
+.form-box h3 {
+  color: #b20000;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+/* Inhalt der Accordion-Abschnitte */
+.form-box p, .form-box li, {
+  color: #b20000;
+  font-size: 14px;
+}
+
+.card h1{
+  color: #b20000;
+  font-size: 24px;
+}
+
