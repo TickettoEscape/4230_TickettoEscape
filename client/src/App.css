@@ -128,7 +128,7 @@ button:hover {
 }
 
 /* Inhalt der Accordion-Abschnitte */
-.form-box p, .form-box li, {
+.form-box p, .form-box li {
   color: #b20000;
   font-size: 14px;
 }
