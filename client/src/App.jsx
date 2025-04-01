@@ -11,8 +11,8 @@ import { Rules} from "./components/start/Rules";
 function App() {
 
   const [gameId, setGameId] = useState("");
-  const [duration, setDuration] = useState("");
-  const [policeCount, setPoliceCount] = useState("");
+  const [duration, setDuration] = useState();
+  const [policeCount, setPoliceCount] = useState();
 
   return (
   <Routes>

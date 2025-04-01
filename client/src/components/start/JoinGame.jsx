@@ -1,11 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
 export const JoinGame = ({ gameId, setGameId }) => {
+  const navigate = useNavigate();
+
+
   const handleJoin = () => {
-    alert(`Joining game with ID: ${gameId}`);
+    localStorage.setItem("gameId",gameId)
+    console.log(gameId)
+    navigate("/role");
   };
+
 
   return (
     <div className="page">

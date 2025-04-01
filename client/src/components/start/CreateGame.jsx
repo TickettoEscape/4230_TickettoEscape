@@ -1,17 +1,20 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
-export const CreateGame = ({ duration, setDuration, policeCount, setPoliceCount }) => {
+export const CreateGame = () => {
   const navigate = useNavigate();
+  const [duration, setDuration] = useState();
+  const [policeCount, setPoliceCount] = useState();
+
 
   const handleCreateGame = () => {
     // Optional: Gültigkeit checken
     if (duration >= 1 && duration <= 10 && policeCount >= 1 && policeCount <= 10) {
-      setDuration(duration);
-      setPoliceCount(policeCount);
-      console.log(duration)
+      console.log("Spielzeit:", duration)
+      console.log("Anzahl Polizisten:", policeCount)
       navigate("/role");
     } else {
       alert("Bitte gültige Werte eingeben!");
