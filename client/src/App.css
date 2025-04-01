@@ -83,7 +83,7 @@ button:hover {
 }
 
 .form-box button:hover {
-  background-color: #a00000;
+  background-color: #b20000;
 }
 
 /* =========================== 
@@ -113,7 +113,7 @@ button:hover {
 
 .form-box input {
   padding: 10px;
-  border: 2px solid #b20000;
+  border: 2px solid #011432;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -149,7 +149,7 @@ button:hover {
 }
 
 /* ================
-   Seiten-X oben rechts 
+   Seiten-X oben rechts
 ================ */
 .close-top-right {
   position: absolute;
@@ -162,7 +162,7 @@ button:hover {
 }
 
 .close-top-right:hover {
-  color: #a00000;
+  color: #b20000;
 }
 
 /* =========================== 
@@ -208,7 +208,7 @@ button:hover {
 }
 
 .close-button:hover {
-  color: #a00000;
+  color: #b20000;
 }
 
 /* --------------------- 
