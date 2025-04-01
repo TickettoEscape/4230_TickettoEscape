@@ -9,6 +9,9 @@ export const CreateGame = ({ duration, setDuration, policeCount, setPoliceCount 
   const handleCreateGame = () => {
     // Optional: Gültigkeit checken
     if (duration >= 1 && duration <= 10 && policeCount >= 1 && policeCount <= 10) {
+      setDuration(duration);
+      setPoliceCount(policeCount);
+      console.log(duration)
       navigate("/role");
     } else {
       alert("Bitte gültige Werte eingeben!");
@@ -23,7 +26,7 @@ export const CreateGame = ({ duration, setDuration, policeCount, setPoliceCount 
         </div>
 
         <div className="form-box">
-          <label htmlFor="duration">Spieldauer (Stunden)</label>
+          <label htmlFor="duration">Maximale Spieldauer (Stunden)</label>
           <input
             id="duration"
             type="number"
