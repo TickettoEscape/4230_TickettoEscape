@@ -8,8 +8,8 @@ export const Rules = () => {
 
   const rules = [
     { key: "allgemein", title: "🎯 Allgemeines", content: "Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape." },
-    { key: "teilnehmer", title: "🧑‍🤝‍🧑 Teilnehmer & Gruppen", content: "1 Räubergruppe & 2-7 Polizistengruppen. Empfehlung: 2-5 Spieler pro Gruppe." },
-    { key: "start", title: "🚦 Spielstart", content: "Die Räuber starten mit 30 Minuten Vorsprung an einem selbstgewählten Bahnhof." },
+    { key: "teilnehmer", title: "🧑‍🤝‍🧑 Teilnehmer & Gruppen", content: "Ein Spiel bestehet aus mindestens einer Räubergruppe und 2-7 Polizistengruppen. Empfohlen werden 2-5 Spieler pro Gruppe." },
+    { key: "start", title: "🚦 Spielstart", content: "Die Räuber starten mit 30 Minuten Vorsprung an einem selbstgewählten Bahnhof und melden diesen den Polizisten" },
     { key: "ablauf", title: "🔄 Spielablauf", content: "• Räuber melden beim Aussteigen den Bahnhof\n• Alle 30 Minuten: Standort & Linienbezeichnung\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben" },
     { key: "ende", title: "🏁 Spielende", content: "• Gefangen am Bahnhof oder im Zug = Polizei gewinnt\n• Regelbruch = Polizei gewinnt" },
     { key: "regeln", title: "⚠️ Zusätzliche Regeln", content: "• Maximal 1.25h im Zug\n• Kein Wiedereinsteigen ohne Richtungswechsel\n• Maximal 1h mit Endbahnhof-Zügen" },
