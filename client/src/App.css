@@ -12,6 +12,12 @@ body {
   align-items: center;
 }
 
+/* Für Station selektion, oben aligniert */
+.page.top-align {
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
 /* =========================== 
    Card Layout 
 =========================== */

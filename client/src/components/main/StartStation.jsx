@@ -34,10 +34,10 @@ export const StartStation = () => {
   };
 
   return (
-    <div className="page">
+    <div className="page top-align">
       <div className="card">
         <div className="form-box">
-          <label htmlFor="search">Bahnhof suchen</label>
+          <label htmlFor="search">Start Bahnhof</label>
           <input
             id="search"
             type="text"
