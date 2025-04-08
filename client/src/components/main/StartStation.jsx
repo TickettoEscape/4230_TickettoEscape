@@ -17,16 +17,20 @@ export const StartStation = () => {
       .catch((err) => console.error("Fehler beim Laden der Datei:", err));
   }, []);
 
-  // Nur Bahnhöfe anzeigen, die mit dem Suchbegriff beginnen
-  const filtered = stations.filter((val) =>
-    val.stop_name.toLowerCase().startsWith(searchTerm.toLowerCase())
-  );
+
+  // 🔍 Gefilterte und alphabetisch sortierte Ergebnisse
+  const filtered = stations
+    .filter((val) =>
+      val.stop_name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => a.stop_name.localeCompare(b.stop_name));
+
 
   //Auswahl speichern
   const handleSelect = (station) => {
-    setSelectedStation(station);
+    setSelectedStation(station.stop_id);
     setSearchTerm(station.stop_name); // den Namen ins Eingabefeld übernehmen
-    console.log("✅ Ausgewählt:", station);
+    console.log("✅ Ausgewählt:", station.stop_name, station.stop_id);
   };
 
   return (
@@ -37,7 +41,7 @@ export const StartStation = () => {
           <input
             id="search"
             type="text"
-            placeholder="z. B. Zürich"
+            placeholder="z.B. Muttenz"
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -67,7 +71,7 @@ export const StartStation = () => {
         {/* Optional: aktuelle Auswahl anzeigen */}
         {selectedStation && (
           <div style={{ marginTop: "30px", color: "#b20000" }}>
-            Gewählt: {selectedStation.stop_name}
+            Gewählt: {selectedStation}
           </div>
         )}
       </div>
