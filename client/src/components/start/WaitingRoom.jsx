@@ -14,7 +14,7 @@ export const WaitingRoom = () => {
         </div>
 
         <div className="form-box">
-          <h3 className="waiting-message">Warte auf die anderen Gruppen.</h3>
+          <h3>Warte auf die anderen Gruppen.</h3>
 
           <table className="waiting-table">
             <thead>

@@ -110,6 +110,7 @@ button:hover {
   font-weight: 500;
   text-align: left;
   width: 100%;
+  font-size: 16px;
   box-sizing: border-box;
   margin-bottom: -10px;
 }
@@ -134,6 +135,7 @@ button:hover {
   font-weight: 600;
   cursor: pointer;
   margin: 8px 0;
+  text-align: center;
 }
 
 
@@ -221,6 +223,7 @@ button:hover {
   color: #b20000;
   font-size: 20px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .popup-content pre {
@@ -228,7 +231,7 @@ button:hover {
   white-space: pre-wrap;
   color: #011432;
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .popup-content input {

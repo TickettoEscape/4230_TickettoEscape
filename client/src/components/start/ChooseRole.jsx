@@ -33,7 +33,7 @@ export const ChooseRole = () => {
         </div>
 
         <div className="form-box">
-          <label>Wähle deine Rolle</label>
+          <h3>Wähle deine Rolle</h3>
           <button onClick={() => handleChoose("Polizei")}>Polizei</button>
           <button onClick={() => handleChoose("Räuber")}>Räuber</button>
         </div>
@@ -45,10 +45,10 @@ export const ChooseRole = () => {
             <div className="popup-header">
               <span onClick={() => setPopupVisible(false)} className="close-button">✕</span>
             </div>
-            <label>Gruppen Name</label>
+            <label>Gruppenname</label>
             <input
               type="text"
-              placeholder="Gruppen Name"
+              placeholder="Winkelbölzer"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
             />
