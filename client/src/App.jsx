@@ -6,6 +6,7 @@ import { CreateGame } from "./components/start/CreateGame"
 import { ChooseRole } from "./components/start/ChooseRole";
 import { Rules} from "./components/start/Rules";
 import { WaitingRoom } from "./components/start/WaitingRoom";
+import { StartStation } from "./components/main/StartStation";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <Route path="/role" element={<ChooseRole />} />
     <Route path="/rules" element={<Rules />} />
     <Route path="/waiting" element={<WaitingRoom />} />
+    <Route path="/startstation" element={<StartStation />} />
 
   </Routes>
 );
