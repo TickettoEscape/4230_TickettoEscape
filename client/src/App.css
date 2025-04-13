@@ -315,3 +315,53 @@ button:hover {
 .waiting-table tr:nth-child(even) td {
   background-color: #e8e8e8;
 }
+
+.form-box {
+  background-color: white;
+  padding: 20px;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.connection-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #b20000;
+  font-size: 14px;
+  border-radius: 8px;
+  table-layout: fixed;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.connection-table thead {
+  background-color: #f7f7f7;
+}
+
+.connection-table th,
+.connection-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: clamp(10px, 2.3vw, 14px);
+  box-sizing: border-box;
+}
+
+.form-box.table-box {
+  padding: 0;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  max-width: 300px;
+  box-sizing: border-box;
+  overflow: hidden;
+}

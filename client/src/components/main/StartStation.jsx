@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
+import { useNavigate } from "react-router-dom";
 
-export const StartStation = () => {
+export const StartStation = ({ setSelectedStop }) => {
   const [stations, setStations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedStation, setSelectedStation] = useState(null); // ausgewählter Bahnhof
+  const navigate = useNavigate();
 
-  // Bahnhofsdaten laden
+  // Bahnhöfe laden
   useEffect(() => {
     fetch("/stops_parent.json")
       .then((res) => res.text())
@@ -19,26 +20,23 @@ export const StartStation = () => {
       .catch((err) => console.error("Fehler beim Laden der Datei:", err));
   }, []);
 
-
-  // 🔍 Gefilterte und alphabetisch sortierte Ergebnisse
+  // Filter für Suche
   const filtered = stations
     .filter((val) =>
       val.stop_name.toLowerCase().startsWith(searchTerm.toLowerCase())
     )
     .sort((a, b) => a.stop_name.localeCompare(b.stop_name));
 
-
-  //Auswahl speichern
+  // Auswahlhandler
   const handleSelect = (station) => {
-    setSelectedStation(station.stop_id);
-    setSearchTerm(station.stop_name); // den Namen ins Eingabefeld übernehmen
-    console.log("✅ Ausgewählt:", station.stop_name, station.stop_id);
+    setSelectedStop(station); // an App übergeben
+    navigate("/connections"); // Weiterleitung auf neue Seite
   };
 
   return (
     <div className="page top-align">
-      <Footer/>
-      <Header/>
+      <Footer />
+      <Header />
       <div className="card">
         <div className="form-box">
           <label htmlFor="search">Start Bahnhof</label>
@@ -47,22 +45,20 @@ export const StartStation = () => {
             type="text"
             placeholder="z.B. Muttenz"
             value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setSelectedStation(null); // Auswahl zurücksetzen bei neuer Eingabe
-            }}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-
-          {/* Nur zeigen, wenn etwas eingegeben wurde UND Treffer vorhanden sind */}
           {searchTerm.length > 0 && filtered.length > 0 && (
             <div style={{ marginTop: "10px" }}>
               {filtered.slice(0, 5).map((val) => (
                 <div
                   key={val.stop_id}
-                  onClick={() => handleSelect(val)} // Auswahl per Klick
+                  onClick={() => handleSelect(val)} // 🠒 Auswahl & Navigation
                   style={{
                     padding: "6px 10px",
                     cursor: "pointer",
+                    backgroundColor: "#f0f0f0",
+                    borderRadius: "5px",
+                    marginBottom: "5px",
                   }}
                 >
                   {val.stop_name}
@@ -71,13 +67,6 @@ export const StartStation = () => {
             </div>
           )}
         </div>
-
-        {/* Optional: aktuelle Auswahl anzeigen */}
-        {selectedStation && (
-          <div style={{ marginTop: "30px", color: "#b20000" }}>
-            Gewählt: {selectedStation}
-          </div>
-        )}
       </div>
     </div>
   );
