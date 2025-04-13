@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "../../App.css";
-import { useNavigate } from "react-router-dom";
 import { Footer } from "../Footer";
 
 export const Infos = () => {
-  const navigate = useNavigate();
   const [popupContent, setPopupContent] = useState(null);
 
   const rules = [
