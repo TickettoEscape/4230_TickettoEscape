@@ -7,6 +7,8 @@ import { ChooseRole } from "./components/start/ChooseRole";
 import { Rules} from "./components/start/Rules";
 import { WaitingRoom } from "./components/start/WaitingRoom";
 import { StartStation } from "./components/main/StartStation";
+import { Infos } from "./components/main/Infos";
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
     <Route path="/rules" element={<Rules />} />
     <Route path="/waiting" element={<WaitingRoom />} />
     <Route path="/startstation" element={<StartStation />} />
+    <Route path="/infos" element={<Infos />} />
 
   </Routes>
 );

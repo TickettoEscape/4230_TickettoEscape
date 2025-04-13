@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Footer } from "../Footer";
 
 export const StartStation = () => {
   const [stations, setStations] = useState([]);
@@ -35,6 +36,7 @@ export const StartStation = () => {
 
   return (
     <div className="page top-align">
+      <Footer/>
       <div className="card">
         <div className="form-box">
           <label htmlFor="search">Start Bahnhof</label>
