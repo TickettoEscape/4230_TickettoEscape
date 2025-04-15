@@ -385,7 +385,7 @@ button:hover {
 
 /* Zeit */
 .timeline-entry .time {
-  text-align: right;
+  text-align: left;
 }
 
 /* Punkt + Linie-Spalte */
@@ -479,3 +479,13 @@ button:hover {
   color: #333;
   font-size: 12px;
 }
+.timeline-entry.past {
+  color: gray;
+  opacity: 0.6;
+}
+
+.timeline-scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+}
+

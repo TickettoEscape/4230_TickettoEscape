@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
 export const WaitingRoom = () => {
+  const navigate = useNavigate();
   const groupName = localStorage.getItem("groupName") || "Unbenannt";
   const role = localStorage.getItem("role") || "Unbekannt";
+
+  const handleStartGame = () => {
+    navigate("/game"); // ändere den Pfad, wenn dein Spielflow anders läuft
+  };
 
   return (
     <div className="page">
@@ -38,6 +44,9 @@ export const WaitingRoom = () => {
               </tr>
             </tbody>
           </table>
+
+          {/* Spiel starten Button */}
+<button onClick={() => navigate("/startstation")}>Spiel starten</button>
         </div>
       </div>
     </div>

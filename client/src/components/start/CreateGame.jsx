@@ -17,7 +17,7 @@ export const CreateGame = () => {
       console.log("Anzahl Polizisten:", policeCount)
       navigate("/role");
     } else {
-      alert("Bitte gültige Werte eingeben!");
+      alert("Bitte gültige Werte zwischen 1 und 10 eingeben!");
     }
   };
 
