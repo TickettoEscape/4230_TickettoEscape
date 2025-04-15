@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import "../../App.css"; // Stelle sicher, dass der Pfad korrekt ist
+import { useNavigate } from "react-router-dom";
+import "../../App.css";
 
 export const NextConnections = ({ selectedStop }) => {
   const [departures, setDepartures] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!selectedStop) return;
@@ -29,29 +32,39 @@ export const NextConnections = ({ selectedStop }) => {
         const tripMap = Object.fromEntries(trips.map(t => [t.trip_id, t]));
         const routeMap = Object.fromEntries(routes.map(r => [r.route_id, r.route_short_name]));
 
-        const rawMatches = stopTimes.filter(st =>
-          st.stop_id.startsWith(`${parentId}:`) &&
-          toMinutes(st.departure_time) >= nowMinutes
+        const relevantStops = stopTimes.filter(st =>
+          st.stop_id.startsWith(`${parentId}:`)
         );
 
-        const fullConnections = rawMatches.map(st => {
-          const trip = tripMap[st.trip_id];
-          const routeId = getRouteIdFromTripId(st.trip_id);
-          const line = routeMap[routeId] || "?";
-          const destination = trip?.trip_headsign || "-";
-          const platform = st.stop_id.split(":").pop();
-          const time = st.departure_time.slice(0, 5);
+        const connections = relevantStops
+          .filter(st => toMinutes(st.departure_time) >= nowMinutes)
+          .map(st => {
+            const trip = tripMap[st.trip_id];
+            const routeId = getRouteIdFromTripId(st.trip_id);
+            const line = routeMap[routeId] || "?";
+            const destination = trip?.trip_headsign || "-";
+            const platform = st.stop_id.split(":").pop();
+            const time = st.departure_time.slice(0, 5);
 
-          return { time, line, destination, platform };
-        });
+            if (
+              destination.toLowerCase().includes(
+                selectedStop.stop_name.toLowerCase()
+              )
+            ) {
+              return null;
+            }
 
-        const fullSorted = fullConnections.sort(
+            return { time, line, destination, platform, tripId: st.trip_id };
+          })
+          .filter(Boolean);
+
+        const sorted = connections.sort(
           (a, b) => toMinutes(a.time) - toMinutes(b.time)
         );
 
-        const unique = [];
         const seen = new Set();
-        for (const entry of fullSorted) {
+        const unique = [];
+        for (const entry of sorted) {
           const key = `${entry.time}|${entry.line}|${entry.destination}|${entry.platform}`;
           if (!seen.has(key)) {
             seen.add(key);
@@ -59,9 +72,10 @@ export const NextConnections = ({ selectedStop }) => {
           }
         }
 
-        setDepartures(unique.slice(0, 5));
+        setDepartures(unique);
+        setOffset(0);
       })
-      .catch(err => console.error("❌ Fehler beim Laden:", err));
+      .catch(err => console.error("Fehler beim Laden:", err));
   }, [selectedStop]);
 
   const parseJsonLines = (text) =>
@@ -77,46 +91,52 @@ export const NextConnections = ({ selectedStop }) => {
     return parts.find(p => p.includes("-")) || "";
   };
 
+  const displayed = departures.slice(offset, offset + 5);
+
   return (
     <div className="page top-align">
       <Header />
       <div className="card">
-        <h3 style={{
-          color: "#b20000",
-          fontSize: "18px",
-          fontWeight: "bold",
-          textAlign: "center",
-          margin: "8px 0"
-        }}>
-          Nächste Verbindungen
-        </h3>
-
-        {/* Neue Form-Box ohne Padding für Tabelle */}
         <div className="form-box table-box">
-          {selectedStop && (
-            <p style={{ padding: "5px" }}>
-              <strong style={{ color: "#b20000" }}>Von:</strong>{" "}
-              {selectedStop.stop_name}
-            </p>
-          )}
+          <h3
+            style={{
+              color: "#b20000",
+              fontSize: "18px",
+              fontWeight: "bold",
+              textAlign: "center",
+              margin: "0 0 10px 0"
+            }}
+          >
+            Nächste Verbindungen ab: {selectedStop?.stop_name}
+          </h3>
 
           <table className="connection-table">
-            <thead>
-              <tr>
-                <th>Zeit</th>
-                <th>Linie</th>
-                <th>Richtung</th>
-                <th>Gleis</th>
-              </tr>
-            </thead>
+          <thead>
+  <tr>
+    <th style={{ width: "20%" }}>Zeit</th>
+    <th style={{ width: "20%" }}>Linie</th> {/* vorher 15% */}
+    <th style={{ width: "40%" }}>Richtung</th>
+    <th style={{ width: "20%" }}>Gleis</th>
+  </tr>
+</thead>
+
             <tbody>
-              {departures.length > 0 ? (
-                departures.map((dep, i) => (
-                  <tr key={i}>
+              {displayed.length > 0 ? (
+                displayed.map((dep, i) => (
+                  <tr
+                    key={i}
+                    onClick={() => navigate(`/trip/${dep.tripId}`)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <td>{dep.time}</td>
                     <td>{dep.line}</td>
-                    <td>{dep.destination}</td>
-                    <td>{dep.platform}</td>
+                    <td style={{
+                      fontSize: "clamp(10px, 1.8vw, 14px)",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis"
+                    }}>{dep.destination}</td>
+                    <td style={{ textAlign: "right" }}>{dep.platform}</td>
                   </tr>
                 ))
               ) : (
@@ -126,6 +146,28 @@ export const NextConnections = ({ selectedStop }) => {
               )}
             </tbody>
           </table>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              marginTop: "10px"
+            }}
+          >
+            <button
+              onClick={() => setOffset(Math.max(0, offset - 5))}
+              disabled={offset === 0}
+            >
+              Frühere Verbindungen
+            </button>
+            <button
+              onClick={() => setOffset(offset + 5)}
+              disabled={offset + 5 >= departures.length}
+            >
+              Spätere Verbindungen
+            </button>
+          </div>
         </div>
       </div>
       <Footer />

@@ -93,6 +93,11 @@ button:hover {
 
 .form-box button:hover {
   background-color: #b20000;
+  color: white;
+}
+.form-box button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* =========================== 
@@ -331,7 +336,7 @@ button:hover {
 .connection-table {
   width: 100%;
   border-collapse: collapse;
-  color: #b20000;
+  color: #0d0d0d;
   font-size: 14px;
   border-radius: 8px;
   table-layout: fixed;
@@ -353,6 +358,7 @@ button:hover {
   text-overflow: ellipsis;
   font-size: clamp(10px, 2.3vw, 14px);
   box-sizing: border-box;
+  height: 42px;
 }
 
 .form-box.table-box {
@@ -364,4 +370,112 @@ button:hover {
   max-width: 300px;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+
+.timeline-entry {
+  display: grid;
+  grid-template-columns: 45px 16px 1fr auto;
+  align-items: center;
+  font-size: 13px;
+  color: black;
+  min-height: 32px;
+  position: relative;
+}
+
+/* Zeit */
+.timeline-entry .time {
+  text-align: right;
+}
+
+/* Punkt + Linie-Spalte */
+.line-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+}
+
+/* Verbindungslinie HINTER dem Punkt */
+.line-col::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: black;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* Punkt: klein & gefüllt */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: black;
+  z-index: 1;
+}
+
+/* Text */
+.timeline-entry .station,
+.timeline-entry .platform,
+.timeline-entry .time {
+  color: black;
+  font-size: 13px;
+}
+
+/* Fetter Eintrag */
+.timeline-entry.selected .station,
+.timeline-entry.selected .time,
+.timeline-entry.selected .platform {
+  font-weight: bold;
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.stop-card {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  justify-content: space-between;
+  box-shadow: 0 0 4px rgba(0,0,0,0.08);
+  border-left: 4px solid transparent;
+}
+
+.stop-card.selected {
+  font-weight: bold;
+  border-left: 4px solid #b20000;
+  background-color: #fff4f4;
+}
+
+.stop-card .time {
+  width: 50px;
+  text-align: right;
+  color: #111;
+}
+
+.stop-card .details {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding-left: 12px;
+}
+
+.stop-card .station {
+  color: #000;
+}
+
+.stop-card .platform {
+  color: #333;
+  font-size: 12px;
 }
