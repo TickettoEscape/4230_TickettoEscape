@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 # Verbindung zur Datenbank herstellen
 db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
+
 engine = create_engine(db_connection_url)
 
 # Variablen

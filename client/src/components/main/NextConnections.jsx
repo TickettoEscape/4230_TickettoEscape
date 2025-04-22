@@ -21,8 +21,7 @@ export const NextConnections = ({ selectedStop }) => {
         );
         const data = await res.json();
 
-        console.log("📦 Received departures JSON:", data); // ← Log here
-
+        console.log("📦 Received departures JSON:", data); // Debug output
         setDepartures(data);
         setOffset(0);
       } catch (err) {
@@ -33,23 +32,16 @@ export const NextConnections = ({ selectedStop }) => {
     fetchDepartures();
   }, [selectedStop]);
 
-  const parseJsonLines = (text) =>
-    text
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => JSON.parse(line));
-
-  const toMinutes = (timeStr) => {
-    const [h, m] = timeStr.split(":").map(Number);
-    return h * 60 + m;
-  };
-
-  const getRouteIdFromTripId = (tripId) => {
-    const parts = tripId.split(".");
-    return parts.find((p) => p.includes("-")) || "";
-  };
-
   const displayed = departures.slice(offset, offset + 5);
+
+  const handleRowClick = (tripId) => {
+    if (!tripId) {
+      console.warn("❌ No tripId found!");
+      return;
+    }
+    console.log("Navigating to /trip with tripId:", tripId);
+    navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
+  };
 
   return (
     <div className="page top-align">
@@ -82,7 +74,7 @@ export const NextConnections = ({ selectedStop }) => {
                 displayed.map((dep, i) => (
                   <tr
                     key={i}
-                    onClick={() => navigate(`/trip/${dep.tripId}`)}
+                    onClick={() => handleRowClick(dep.tripId)}
                     style={{ cursor: "pointer" }}
                   >
                     <td>{dep.time}</td>

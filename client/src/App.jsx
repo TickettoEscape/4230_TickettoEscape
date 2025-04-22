@@ -14,8 +14,6 @@ import { Infos } from "./components/main/Infos";
 import { NextConnections } from "./components/main/NextConnections";
 import { TripDetails } from "./components/main/TripDetails"; // neu
 
-
-
 function App() {
   const [selectedStop, setSelectedStop] = useState(null); // Zentraler Zustand für den Bahnhof
 
@@ -28,9 +26,15 @@ function App() {
       <Route path="/rules" element={<Rules />} />
       <Route path="/waiting" element={<WaitingRoom />} />
       <Route path="/infos" element={<Infos />} />
-      <Route path="/startstation" element={<StartStation setSelectedStop={setSelectedStop} />} />
-      <Route path="/connections" element={<NextConnections selectedStop={selectedStop} />} />
-      <Route path="/trip/:tripId" element={<TripDetails />} />
+      <Route
+        path="/startstation"
+        element={<StartStation setSelectedStop={setSelectedStop} />}
+      />
+      <Route
+        path="/connections"
+        element={<NextConnections selectedStop={selectedStop} />}
+      />
+      <Route path="/trip" element={<TripDetails />} />
     </Routes>
   );
 }

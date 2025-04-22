@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import "../../App.css";
 
 export const TripDetails = () => {
-  const [tripDetails, setTripDetails] = useState([]);
+  const { tripId } = useParams();
+  const [searchParams] = useSearchParams();
+  const selectedStopId = searchParams.get("stopId");
+
+  const [stopTimes, setStopTimes] = useState([]);
+  const [stopsMap, setStopsMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [routeName, setRouteName] = useState("");
   const [headsign, setHeadsign] = useState("");
-  const [stopTimes, setStopTimes] = useState([]);
 
-  // Getting tripId from the URL query parameters
-  const [searchParams] = useSearchParams();
-  const tripId = searchParams.get("tripId");
+  // Hilfsfunktion: Parent aus stop_id extrahieren
+  const getParentId = (fullStopId) => fullStopId.split(":")[0];
 
+  // Bereinige "Parent..." aus stopId
+  const cleanedStopId = selectedStopId?.startsWith("Parent")
+    ? selectedStopId.replace("Parent", "")
+    : selectedStopId;
+
+  // Body-Scroll verhindern
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -22,26 +31,51 @@ export const TripDetails = () => {
     };
   }, []);
 
+  // Daten laden
   useEffect(() => {
-    if (!tripId) return;
+    Promise.all([
+      fetch("/stop_times.json").then((res) => res.text()),
+      fetch("/stops.json").then((res) => res.text()),
+      fetch("/trips.json").then((res) => res.text()),
+      fetch("/routes.json").then((res) => res.text()),
+    ])
+      .then(([stopTimesText, stopsText, tripsText, routesText]) => {
+        const stopTimesData = stopTimesText
+          .split("\n")
+          .filter(Boolean)
+          .map((line) => JSON.parse(line))
+          .filter((entry) => entry.trip_id === tripId)
+          .sort((a, b) => a.stop_sequence - b.stop_sequence);
 
-    // Fetch trip details
-    const fetchTripDetails = async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:8000/api/departures_details?trip_id=${tripId}`
-        );
-        const data = await res.json();
-        setStopTimes(data);
-        setLoading(false);
-      } catch (err) {
-        console.error("❌ Error fetching trip details:", err);
-        setLoading(false);
-      }
-    };
+        const stopsData = stopsText
+          .split("\n")
+          .filter(Boolean)
+          .map((line) => JSON.parse(line));
 
-    fetchTripDetails();
-  }, [tripId]);
+        const tripsData = tripsText
+          .split("\n")
+          .filter(Boolean)
+          .map((line) => JSON.parse(line));
+
+        const routesData = routesText
+          .split("\n")
+          .filter(Boolean)
+          .map((line) => JSON.parse(line));
+
+        const trip = tripsData.find((t) => t.trip_id === tripId);
+        const route = routesData.find((r) => r.route_id === trip?.route_id);
+
+        setRouteName(route?.route_short_name || "?");
+        setHeadsign(trip?.trip_headsign || "-");
+
+        const stops = Object.fromEntries(stopsData.map((s) => [s.stop_id, s]));
+        setStopsMap(stops);
+        setStopTimes(stopTimesData);
+
+        setLoading(false);
+      })
+      .catch((err) => console.error("Fehler beim Laden der Daten:", err));
+  }, [tripId, cleanedStopId]);
 
   return (
     <div className="page top-align">
@@ -90,8 +124,13 @@ export const TripDetails = () => {
               }}
             >
               {stopTimes.map((stop, index) => {
+                const stopData = stopsMap[stop.stop_id];
+                const name = stopData?.stop_name || stop.stop_id;
+                const platform = stop.stop_id.split(":").pop();
                 const time = stop.departure_time.slice(0, 5);
-                const isSelected = stop.stop_name.includes(tripId);
+
+                const stopParent = getParentId(stop.stop_id);
+                const isSelected = stopParent === cleanedStopId;
                 const isFirst = index === 0;
                 const isLast = index === stopTimes.length - 1;
 
@@ -115,8 +154,8 @@ export const TripDetails = () => {
                     <div className="line-col">
                       <div className="dot" />
                     </div>
-                    <div className="station">{stop.stop_name}</div>
-                    <div className="platform">Gleis {stop.platform}</div>
+                    <div className="station">{name}</div>
+                    <div className="platform">Gleis {platform}</div>
                   </div>
                 );
               })}
