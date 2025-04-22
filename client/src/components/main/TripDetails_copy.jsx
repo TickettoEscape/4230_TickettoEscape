@@ -151,9 +151,7 @@ export const TripDetails = () => {
                     >
                       {time}
                     </div>
-                    <div className="line-col">
-                      <div className="dot" />
-                    </div>
+
                     <div className="station">{name}</div>
                     <div className="platform">Gleis {platform}</div>
                   </div>

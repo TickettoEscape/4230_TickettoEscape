@@ -47,82 +47,89 @@ export const TripDetails = () => {
     <div className="page top-align">
       <Header />
       <div className="card">
-        <div
-          className="form-box table-box"
-          style={{
-            maxWidth: "360px",
-            padding: "16px",
-            boxSizing: "border-box",
-            height: "auto",
-            maxHeight: "calc(100vh - 160px)",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-          }}
-        >
-          <h3
-            style={{
-              color: "#b20000",
-              textAlign: "center",
-              fontSize: "18px",
-              marginBottom: "10px",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            Fahrplan{" "}
-            {routeName
-              ? `${routeName} Richtung ${headsign}`
-              : "dieser Verbindung"}
-          </h3>
+      <div
+  className="form-box table-box"
+  style={{
+    maxWidth: "360px",
+    padding: "16px",
+    boxSizing: "border-box",
+    height: "auto",
+    maxHeight: "calc(100vh - 160px)",
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
+    position: "relative", // wichtig
+  }}
+>
+  {/* Fixer Titel */}
+  <div
+    style={{
+      color: "#b20000",
+      textAlign: "center",
+      fontSize: "18px",
+      // marginBottom: "10px",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      paddingBottom: "8px",
+      background: "white",
+      position: "sticky",
+      top: "0",
+      zIndex: 10,
+    }}
+  >
+    Fahrplan{" "}
+    {routeName
+      ? `${routeName} Richtung ${headsign}`
+      : "dieser Verbindung"}
+  </div>
 
-          {loading ? (
-            <p style={{ textAlign: "center" }}>Lade Daten...</p>
-          ) : (
+  {/* Scrollbarer Bereich */}
+  {loading ? (
+    <p style={{ textAlign: "center" }}>Lade Daten...</p>
+  ) : (
+    <div
+      className="timeline"
+      style={{
+        flexGrow: 1,
+        overflowY: "auto",
+        padding: "10px 16px 10px 10px",
+        boxSizing: "border-box",
+      }}
+    >
+      {stopTimes.map((stop, index) => {
+        const time = stop.departure_time.slice(0, 5);
+        const isSelected = stop.stop_name.includes(tripId);
+        const isFirst = index === 0;
+        const isLast = index === stopTimes.length - 1;
+
+        return (
+          <div
+            key={index}
+            className={`timeline-entry ${
+              isSelected ? "selected" : ""
+            } ${isFirst ? "first" : ""} ${isLast ? "last" : ""}`}
+          >
             <div
-              className="timeline"
+              className="time"
               style={{
-                flexGrow: 1,
-                overflowY: "auto",
-                padding: "10px 16px 10px 10px",
-                boxSizing: "border-box",
+                textAlign: "left",
+                minWidth: "40px",
+                paddingRight: "6px",
               }}
             >
-              {stopTimes.map((stop, index) => {
-                const time = stop.departure_time.slice(0, 5);
-                const isSelected = stop.stop_name.includes(tripId);
-                const isFirst = index === 0;
-                const isLast = index === stopTimes.length - 1;
-
-                return (
-                  <div
-                    key={index}
-                    className={`timeline-entry ${
-                      isSelected ? "selected" : ""
-                    } ${isFirst ? "first" : ""} ${isLast ? "last" : ""}`}
-                  >
-                    <div
-                      className="time"
-                      style={{
-                        textAlign: "left",
-                        minWidth: "40px",
-                        paddingRight: "6px",
-                      }}
-                    >
-                      {time}
-                    </div>
-                    <div className="line-col">
-                      <div className="dot" />
-                    </div>
-                    <div className="station">{stop.stop_name}</div>
-                    <div className="platform">Gleis {stop.platform}</div>
-                  </div>
-                );
-              })}
+              {time}
             </div>
-          )}
-        </div>
+            <div className="line-col"></div>
+            <div className="station">{stop.stop_name}</div>
+            <div className="platform">Gleis {stop.platform}</div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+</div>
+
       </div>
       <Footer />
     </div>

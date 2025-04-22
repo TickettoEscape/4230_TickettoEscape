@@ -437,7 +437,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .stop-card {
@@ -488,4 +488,3 @@ button:hover {
   max-height: 400px;
   overflow-y: auto;
 }
-
