@@ -5,6 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from pydantic import BaseModel
 from typing import List
+import uuid
 
 app = FastAPI()
 
@@ -18,7 +19,7 @@ app.add_middleware(
 )
 
 # Database connection
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_Demo"
 engine = create_engine(db_connection_url)
 
 # Pydantic model for stop time response
@@ -155,3 +156,62 @@ def get_departure_details(trip_id: str = Query(..., description="Trip ID for whi
     except Exception as e:
         print("❌ Error during query:", str(e))
         return {"error": str(e)}
+
+
+
+# Create Game
+@app.post("/api/create_game")
+def create_game(duration: int = Query(...), police_count: int = Query(...)):
+    try:
+        count_query = "SELECT COUNT (*) FROM games"
+        row_count = pd.read_sql_query(count_query, engine)
+
+        # Generate the game_id as row_count + 1
+        game_id = str(row_count + 1)
+
+        # Insert the new game into the database
+        query = f"""
+        INSERT INTO games (game_id, duration, police_count)
+        VALUES ('{game_id}', {duration}, {police_count})
+        """
+        with engine.begin() as conn:
+            conn.execute(query)
+
+        return {"gameId": game_id}
+    except Exception as e:
+        return {"error": str(e)}
+
+# Join Game (Add Player)
+@app.post("/api/join_game")
+def join_game(game_id: str = Query(...), group_name: str = Query(...), role: str = Query(...)):
+    try:
+        query = f"""
+        INSERT INTO players (game_id, group_name, role)
+        VALUES ('{game_id}', '{group_name}', '{role}')
+        """
+        with engine.begin() as conn:
+            conn.execute(query)
+        return {"message": "Player joined successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+
+# Get Players by Game
+@app.get("/api/games/{game_id}/players")
+def get_players(game_id: str):
+    try:
+        query = f"""
+        SELECT group_name, role
+        FROM players
+        WHERE game_id = '{game_id}'
+        """
+        df = pd.read_sql_query(query, engine)
+
+        if df.empty:
+            raise HTTPException(status_code=404, detail="No players found for this game ID")
+
+        # Return as list of dicts
+        return df.to_dict(orient="records")
+
+    except Exception as e:
+        print(f"❌ Error in get_players: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")

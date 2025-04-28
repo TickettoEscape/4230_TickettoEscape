@@ -9,7 +9,7 @@ export const JoinGame = () => {
 
   const handleJoin = () => {
     localStorage.setItem("gameId", gameId);
-    console.log(gameId);
+    console.log("Beigetreten zu Game ID:", gameId);
     navigate("/role");
   };
 
@@ -19,7 +19,6 @@ export const JoinGame = () => {
         <div className="logo-container">
           <img src={logo} alt="Ticket to Escape" />
         </div>
-
         <div className="form-box">
           <label htmlFor="gameId">Spiel ID</label>
           <input

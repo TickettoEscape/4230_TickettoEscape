@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from datetime import datetime, timedelta
 
 # Verbindung zur Datenbank herstellen
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
 
 engine = create_engine(db_connection_url)
 
@@ -51,3 +51,8 @@ df = df.drop(columns=['stop_id'])
 # Ausgabe anzeigen
 print("Alle Bahnhöfe auf der Route:")
 print(df)
+
+
+count_query = "SELECT COUNT (*) FROM games"
+row_count = pd.read_sql_query(count_query, engine)
+print(row_count)
