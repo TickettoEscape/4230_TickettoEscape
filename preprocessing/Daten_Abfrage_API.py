@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 # Database connection
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
 engine = create_engine(db_connection_url)
 
 # -------------------------
