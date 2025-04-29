@@ -1,15 +1,16 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
-import pandas as pd
-from datetime import datetime, timedelta
 from pydantic import BaseModel
+from datetime import datetime, timedelta
 from typing import List
-import uuid
+import pandas as pd
+import random
 
+# Initialize app
 app = FastAPI()
 
-# Optional: allow frontend access (localhost:3000)
+# Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -19,10 +20,13 @@ app.add_middleware(
 )
 
 # Database connection
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_Demo"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
 engine = create_engine(db_connection_url)
 
-# Pydantic model for stop time response
+# -------------------------
+# Models
+# -------------------------
+
 class StopTime(BaseModel):
     trip_id: str
     stop_name: str
@@ -30,18 +34,95 @@ class StopTime(BaseModel):
     stop_sequence: int
     platform: str
 
-@app.get("/api/departures")
-def get_departures(stop_name: str = Query(..., description="Name of the stop (e.g. 'Basel SBB')")):
-    print(f"✅ Received stop_name: {stop_name}")  # log input
+class GameCreateRequest(BaseModel):
+    duration: int
+    police_count: int
 
+
+class GroupCreateRequest(BaseModel):
+    game_id: int
+    group_name: str
+    role: str
+# -------------------------
+# Game Routes
+# -------------------------
+
+@app.post("/api/create_game")
+def create_game(data: GameCreateRequest):
+    try:
+        game_id = random.randint(0, 9999)
+        df = pd.DataFrame({
+            'game_id': [game_id],
+            'duration': [data.duration],
+            'police_count': [data.police_count]
+        })
+
+        df.to_sql('games', con=engine, if_exists='append', index=False)
+        return {"gameId": game_id}
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/api/waiting")
+def get_players(game_id: str = Query(...)):
+    try:
+        query = f"""
+        SELECT group_name, role FROM groups WHERE game_id = {game_id}
+        """
+        df = pd.read_sql_query(query, engine)
+        return df.to_dict(orient="records")
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/api/checkRauberRole")
+def check_rauber_role():
+    try:
+        # Query to check if any group has selected the 'Räuber' role
+        query = "SELECT COUNT(*) FROM groups WHERE role = 'Räuber' AND game_id IS {game_id}"
+        result = pd.read_sql_query(query, engine)
+
+        # If the count is greater than 0, it means 'Räuber' has already been chosen
+        if result.iloc[0, 0] > 0:
+            return {"isRauberTaken": True}
+        else:
+            return {"isRauberTaken": False}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/newGroup")
+def create_group(data: GroupCreateRequest):
+    try:
+        group_id = random.randint(0, 9999)
+
+        df = pd.DataFrame({
+            'group_id': [group_id],
+            'game_id': [data.game_id],
+            'group_name': [data.group_name],
+            'role': [data.role],
+        })
+
+        df.to_sql('groups', con=engine, if_exists='append', index=False)
+
+        return {"groupId": group_id}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+
+
+# -------------------------
+# Departure Routes
+# -------------------------
+
+@app.get("/api/departures")
+def get_departures(stop_name: str = Query(...)):
     try:
         time_from_dt = datetime.now()
         time_to_dt = time_from_dt + timedelta(hours=1)
 
         Combined_Query = f"""
         WITH valid_services AS (
-            SELECT service_id
-            FROM calendar
+            SELECT service_id FROM calendar
             WHERE CURRENT_DATE BETWEEN start_date AND end_date
               AND (
                 (EXTRACT(DOW FROM CURRENT_DATE) = 0 AND sunday) OR
@@ -52,9 +133,7 @@ def get_departures(stop_name: str = Query(..., description="Name of the stop (e.
                 (EXTRACT(DOW FROM CURRENT_DATE) = 5 AND friday) OR
                 (EXTRACT(DOW FROM CURRENT_DATE) = 6 AND saturday)
               )
-
             UNION
-
             SELECT service_id FROM calendar_dates
             WHERE date = CURRENT_DATE AND exception_type = 1
         ),
@@ -77,12 +156,10 @@ def get_departures(stop_name: str = Query(..., description="Name of the stop (e.
             st.departure_time,
             st.stop_id,
             t.trip_headsign AS destination
-
         FROM routes r
         JOIN trips t ON r.route_id = t.route_id
         JOIN final_services fs ON t.service_id = fs.service_id
         JOIN stop_times st ON t.trip_id = st.trip_id
-
         WHERE st.departure_time BETWEEN '{time_from_dt.strftime('%H:%M:%S')}' AND '{time_to_dt.strftime('%H:%M:%S')}'
           AND st.stop_id IN (
             SELECT stop_id 
@@ -94,39 +171,24 @@ def get_departures(stop_name: str = Query(..., description="Name of the stop (e.
             )
           )
           AND t.trip_headsign NOT LIKE '{stop_name}'
-
         ORDER BY st.departure_time, r.route_short_name;
         """
 
-        # Execute the SQL query and load the result into a DataFrame
         df = pd.read_sql_query(Combined_Query, engine)
-        print(f"✅ Query executed, rows returned: {len(df)}")
-        print(df.head())
-
-        # Ensure the columns are strings and handle NaN values
         df['platform'] = df['stop_id'].fillna('').astype(str).str.split(':').str[-1]
         df['time'] = df['departure_time'].fillna('').astype(str).str.slice(0, 5)
 
-        # Rename trip_id to tripId
         df.rename(columns={"trip_id": "tripId"}, inplace=True)
-
-        # Drop unwanted columns
         df = df.drop(columns=['stop_id', 'departure_time', 'route_id', 'service_id'])
-
-        # Remove duplicates
         df = df.drop_duplicates()
 
-        # Return the data as a list of dictionaries
         return df.to_dict(orient='records')
 
     except Exception as e:
-        print("❌ Error during query or processing:", str(e))
         return {"error": str(e)}
 
-
 @app.get("/api/departures_details")
-def get_departure_details(trip_id: str = Query(..., description="Trip ID for which to fetch full stop details")):
-    print(f"📦 Fetching stop times for trip_id: {trip_id}")
+def get_departure_details(trip_id: str = Query(...)):
     try:
         query = f"""
         SELECT 
@@ -141,77 +203,11 @@ def get_departure_details(trip_id: str = Query(..., description="Trip ID for whi
         WHERE st.trip_id = '{trip_id}'
         ORDER BY st.stop_sequence;
         """
-
         df = pd.read_sql_query(query, engine)
-
-        # Add platform info from stop_id
         df['platform'] = df['stop_id'].fillna('').astype(str).str.split(':').str[-1]
-
-        # Optional: Clean up stop_id from response if not needed
         df = df.drop(columns=['stop_id'])
 
-        # Return as JSON
         return df.to_dict(orient="records")
 
     except Exception as e:
-        print("❌ Error during query:", str(e))
         return {"error": str(e)}
-
-
-
-# Create Game
-@app.post("/api/create_game")
-def create_game(duration: int = Query(...), police_count: int = Query(...)):
-    try:
-        count_query = "SELECT COUNT (*) FROM games"
-        row_count = pd.read_sql_query(count_query, engine)
-
-        # Generate the game_id as row_count + 1
-        game_id = str(row_count + 1)
-
-        # Insert the new game into the database
-        query = f"""
-        INSERT INTO games (game_id, duration, police_count)
-        VALUES ('{game_id}', {duration}, {police_count})
-        """
-        with engine.begin() as conn:
-            conn.execute(query)
-
-        return {"gameId": game_id}
-    except Exception as e:
-        return {"error": str(e)}
-
-# Join Game (Add Player)
-@app.post("/api/join_game")
-def join_game(game_id: str = Query(...), group_name: str = Query(...), role: str = Query(...)):
-    try:
-        query = f"""
-        INSERT INTO players (game_id, group_name, role)
-        VALUES ('{game_id}', '{group_name}', '{role}')
-        """
-        with engine.begin() as conn:
-            conn.execute(query)
-        return {"message": "Player joined successfully"}
-    except Exception as e:
-        return {"error": str(e)}
-
-# Get Players by Game
-@app.get("/api/games/{game_id}/players")
-def get_players(game_id: str):
-    try:
-        query = f"""
-        SELECT group_name, role
-        FROM players
-        WHERE game_id = '{game_id}'
-        """
-        df = pd.read_sql_query(query, engine)
-
-        if df.empty:
-            raise HTTPException(status_code=404, detail="No players found for this game ID")
-
-        # Return as list of dicts
-        return df.to_dict(orient="records")
-
-    except Exception as e:
-        print(f"❌ Error in get_players: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error")

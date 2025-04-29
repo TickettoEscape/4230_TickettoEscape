@@ -5,8 +5,8 @@ import logo from "../../data/Logo.png";
 
 export const CreateGame = () => {
   const navigate = useNavigate();
-  const [duration, setDuration] = useState();
-  const [policeCount, setPoliceCount] = useState();
+  const [duration, setDuration] = useState(); // State for game duration
+  const [policeCount, setPoliceCount] = useState(); // State for police count
 
   const handleCreateGame = () => {
     if (
@@ -15,21 +15,35 @@ export const CreateGame = () => {
       policeCount >= 1 &&
       policeCount <= 10
     ) {
-      fetch(
-        `http://localhost:8000/api/create_game?duration=${duration}&police_count=${policeCount}`,
-        {
-          method: "POST",
-        }
-      )
+      const payload = {
+        duration: duration,
+        police_count: policeCount,
+      };
+
+      console.log("Sending JSON to backend:", payload);
+
+      fetch("http://localhost:8000/api/create_game", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
         .then((res) => res.json())
         .then((data) => {
-          console.log("Spielzeit:", duration);
-          console.log("Anzahl Polizisten:", policeCount);
+          if (data.error) {
+            alert("Fehler beim Erstellen des Spiels: " + data.error);
+            return;
+          }
+
           console.log("Game ID:", data.gameId);
           localStorage.setItem("gameId", data.gameId);
+          localStorage.setItem("policeCount", policeCount); // Store duration in localStorage
           navigate("/role");
         })
-        .catch((err) => console.error("Error creating game:", err));
+        .catch((err) => {
+          console.error("Fehler beim Erstellen des Spiels:", err);
+        });
     } else {
       alert("Bitte gültige Werte zwischen 1 und 10 eingeben!");
     }
@@ -41,6 +55,7 @@ export const CreateGame = () => {
         <div className="logo-container">
           <img src={logo} alt="Ticket to Escape" />
         </div>
+
         <div className="form-box">
           <label htmlFor="duration">Maximale Spieldauer (Stunden)</label>
           <input
@@ -50,8 +65,9 @@ export const CreateGame = () => {
             min={1}
             max={10}
             value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            onChange={(e) => setDuration(Number(e.target.value))} // Update duration
           />
+
           <label htmlFor="policeCount">Anzahl Polizisten</label>
           <input
             id="policeCount"
@@ -60,8 +76,9 @@ export const CreateGame = () => {
             min={1}
             max={10}
             value={policeCount}
-            onChange={(e) => setPoliceCount(e.target.value)}
+            onChange={(e) => setPoliceCount(Number(e.target.value))} // Update policeCount
           />
+
           <button onClick={handleCreateGame}>Spiel erstellen</button>
         </div>
       </div>

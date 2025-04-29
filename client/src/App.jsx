@@ -5,10 +5,10 @@ import "./App.css";
 
 import { StartScreen } from "./components/start/StartScreen";
 import { JoinGame } from "./components/start/JoinGame";
-import { CreateGame } from "./components/start/CreateGame";
-import { ChooseRole } from "./components/start/ChooseRole";
+import { CreateGame } from "./components/start/CreateGame_DB";
+import { ChooseRole } from "./components/start/ChooseRole_DB";
 import { Rules } from "./components/start/Rules";
-import { WaitingRoom } from "./components/start/WaitingRoom";
+import { WaitingRoom } from "./components/start/WaitingRoom_DB";
 import { StartStation } from "./components/main/StartStation";
 import { Infos } from "./components/main/Infos";
 import { NextConnections } from "./components/main/NextConnections";
