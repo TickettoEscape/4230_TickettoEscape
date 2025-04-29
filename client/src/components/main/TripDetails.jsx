@@ -62,7 +62,7 @@ export const TripDetails = () => {
   }}
 >
   {/* Fixer Titel */}
-  <div
+  <h3
     style={{
       color: "#b20000",
       textAlign: "center",
@@ -78,11 +78,11 @@ export const TripDetails = () => {
       zIndex: 10,
     }}
   >
-    Fahrplan{" "}
+    Fahrplan {routeName} {" "}
     {routeName
       ? `${routeName} Richtung ${headsign}`
       : "dieser Verbindung"}
-  </div>
+  </h3>
 
   {/* Scrollbarer Bereich */}
   {loading ? (
@@ -123,12 +123,23 @@ export const TripDetails = () => {
             <div className="line-col"></div>
             <div className="station">{stop.stop_name}</div>
             <div className="platform">Gleis {stop.platform}</div>
+
           </div>
+
         );
       })}
     </div>
+
   )}
+  <div>
+    <button
+    >
+    Auswahl bestätigen
+    </button>
+    </div>
 </div>
+
+
 
       </div>
       <Footer />
