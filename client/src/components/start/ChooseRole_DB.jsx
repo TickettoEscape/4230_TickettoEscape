@@ -19,10 +19,9 @@ export const ChooseRole = () => {
         );
         const data = await res.json();
         console.log("Räuber check result:", data);
-        setIsRauberDisabled(!!data.isRauberTaken); // Disable if taken
+        setIsRauberDisabled(data); // Disable if taken
       } catch (err) {
         console.error("Error checking 'Räuber' role:", err);
-        setIsRauberDisabled(false); // Fail-safe: don't disable unnecessarily
       }
     };
 

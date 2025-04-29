@@ -66,25 +66,27 @@ def create_game(data: GameCreateRequest):
 def get_players(game_id: str = Query(...)):
     try:
         query = f"""
-        SELECT group_name, role FROM groups WHERE game_id = {game_id}
+        SELECT group_name, role FROM groups WHERE game_id = '{game_id}'
         """
         df = pd.read_sql_query(query, engine)
         return df.to_dict(orient="records")
     except Exception as e:
         return {"error": str(e)}
 
-@app.get("/api/checkRauberRole")
-def check_rauber_role():
-    try:
-        # Query to check if any group has selected the 'Räuber' role
-        query = "SELECT COUNT(*) FROM groups WHERE role = 'Räuber' AND game_id IS {game_id}"
-        result = pd.read_sql_query(query, engine)
 
-        # If the count is greater than 0, it means 'Räuber' has already been chosen
-        if result.iloc[0, 0] > 0:
-            return {"isRauberTaken": True}
-        else:
-            return {"isRauberTaken": False}
+
+@app.get("/api/checkRauberRole")
+def check_rauber_taken(game_id: int = Query(...)):
+    try:
+        query = f"""
+            SELECT COUNT(*) as count
+            FROM groups
+            WHERE role = 'Räuber' AND game_id = '{game_id}'
+        """
+        df = pd.read_sql_query(query, engine, params={"game_id": game_id})
+        rauber_taken = bool(df.iloc[0]["count"])
+        
+        return rauber_taken
     except Exception as e:
         return {"error": str(e)}
 

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from datetime import datetime, timedelta
 
 # Verbindung zur Datenbank herstellen
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
 
 engine = create_engine(db_connection_url)
 
@@ -72,13 +72,25 @@ engine = create_engine(db_connection_url)
 #     connection.execute(create_game)
 
 
-import pandas as pd
+# import pandas as pd
 
-# Create a DataFrame with the data you want to insert
-import random
-game_id = random.randint(0, 9999)
-data = {'game_id': [game_id], 'duration': [3], 'police_count': [5]}
-df = pd.DataFrame(data)
+# # Create a DataFrame with the data you want to insert
+# import random
+# game_id = random.randint(0, 9999)
+# data = {'game_id': [game_id], 'duration': [3], 'police_count': [5]}
+# df = pd.DataFrame(data)
 
-# Assuming engine is already defined
-df.to_sql('games', con=engine, if_exists='append', index=False)
+# # Assuming engine is already defined
+# df.to_sql('games', con=engine, if_exists='append', index=False)
+
+game_id = 9119  # Beispielwert, ersetzen Sie ihn durch den tatsächlichen Wert
+
+query = f"""
+            SELECT COUNT(*) as count
+            FROM groups
+            WHERE role = 'Räuber' AND game_id = '{game_id}'
+        """
+df = pd.read_sql_query(query, engine, params={"game_id": game_id})
+rauber_taken = df.iloc[0]["count"] >= 1
+
+print(rauber_taken)
