@@ -20,8 +20,6 @@ export const NextConnections = ({ selectedStop }) => {
           )}`
         );
         const data = await res.json();
-
-        console.log("📦 Received departures JSON:", data); // Debug output
         setDepartures(data);
         setOffset(0);
       } catch (err) {
@@ -39,7 +37,6 @@ export const NextConnections = ({ selectedStop }) => {
       console.warn("❌ No tripId found!");
       return;
     }
-    console.log("Navigating to /trip with tripId:", tripId);
     navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
   };
 

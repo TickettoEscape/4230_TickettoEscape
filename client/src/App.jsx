@@ -12,7 +12,8 @@ import { WaitingRoom } from "./components/start/WaitingRoom_DB";
 import { StartStation } from "./components/main/StartStation";
 import { Infos } from "./components/main/Infos";
 import { NextConnections } from "./components/main/NextConnections";
-import { TripDetails } from "./components/main/TripDetails"; // neu
+import { TripDetails } from "./components/main/TripDetails";
+import { NextStation } from "./components/main/NextStation";
 
 function App() {
   const [selectedStop, setSelectedStop] = useState(null); // Zentraler Zustand für den Bahnhof
@@ -35,6 +36,10 @@ function App() {
         element={<NextConnections selectedStop={selectedStop} />}
       />
       <Route path="/trip" element={<TripDetails />} />
+      <Route
+        path="/nextstation"
+        element={<NextStation setSelectedStop={setSelectedStop} />}
+      />
     </Routes>
   );
 }

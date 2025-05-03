@@ -11,7 +11,6 @@ export const ChooseRole = () => {
 
   const handleChoose = (role) => {
     localStorage.setItem("role", role);
-    console.log("Gewählte Rolle:", role);
     setPopupVisible(true);
   };
 
@@ -21,7 +20,6 @@ export const ChooseRole = () => {
       return;
     }
     localStorage.setItem("groupName", groupName);
-    console.log("Gruppenname gespeichert:", groupName);
     navigate("/waiting");
   };
 
@@ -43,7 +41,12 @@ export const ChooseRole = () => {
         <div className="popup-overlay">
           <div className="popup-content">
             <div className="popup-header">
-              <span onClick={() => setPopupVisible(false)} className="close-button">✕</span>
+              <span
+                onClick={() => setPopupVisible(false)}
+                className="close-button"
+              >
+                ✕
+              </span>
             </div>
             <label>Gruppenname</label>
             <input
