@@ -198,10 +198,14 @@ def get_departure_details(trip_id: str = Query(...)):
             sp.stop_name,
             st.departure_time,
             st.stop_sequence,
-            st.stop_id
+            st.stop_id,
+            t.trip_headsign,
+            r.route_short_name
         FROM stop_times st
         JOIN stops s ON st.stop_id = s.stop_id
         JOIN stops_parent sp ON sp.stop_id = s.parent_station
+        Join trips t ON st.trip_id = t.trip_id
+        join routes r ON t.route_id = r.route_id
         WHERE st.trip_id = '{trip_id}'
         ORDER BY st.stop_sequence;
         """
