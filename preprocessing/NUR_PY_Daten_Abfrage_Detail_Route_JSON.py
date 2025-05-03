@@ -107,10 +107,12 @@ engine = create_engine(db_connection_url)
 
 #         df.to_sql('games', con=engine, if_exists='append', index=False)
 from datetime import time
+import pandas as pd
 
+# Create the DataFrame
 df = pd.DataFrame({
     'group_id': [1],
-    'game_id': [101],
+    'fame_id': [101],  # Correct column name
     'from_stop': ['Central Station'],
     'login_time': [time(8, 15)],
     'logout_time': [time(8, 45)],
@@ -124,3 +126,15 @@ df = pd.DataFrame({
 
 # Insert into 'history' table
 df.to_sql('history', con=engine, if_exists='append', index=False)
+
+# Query to get the inserted record
+history_query = """
+    SELECT * FROM history
+    WHERE group_id = 1 AND fame_id = 101
+    ORDER BY history_id ASC
+    LIMIT 1
+"""
+
+# Run query and print result
+result_df = pd.read_sql_query(history_query, engine)
+print(result_df)

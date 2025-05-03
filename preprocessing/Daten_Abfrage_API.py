@@ -43,6 +43,21 @@ class GroupCreateRequest(BaseModel):
     game_id: int
     group_name: str
     role: str
+
+class GroupInputHistory(BaseModel):
+    group_id: int
+    game_id: int
+    from_stop: str
+    from_stop: str
+    login_time: str
+    logout_time: str
+    departure_time: str
+    trip_id: str
+    to_stop: str
+    arrival_time: str
+    send_stop: bool
+    send_trip: bool
+
 # -------------------------
 # Game Routes
 # -------------------------
@@ -110,6 +125,28 @@ def create_group(data: GroupCreateRequest):
         return {"error": str(e)}
 
 
+@app.post("/api/history")
+def alter_history(data: GroupInputHistory):
+    try:
+        df = pd.DataFrame({
+            'group_id': [data.group_id],
+            'game_id': [data.game_id],
+            'from_stop': [data.from_stop],
+            'login_time': [data.login_time],
+            'logout_time': [data.logout_time],
+            'departure_time': [data.departure_time],
+            'trip_id': [data.trip_id],
+            'to_stop': [data.to_stop],
+            'arrival_time': [data.arrival_time],
+            'send_stop': [data.send_stop],
+            'send_trip': [data.send_trip],
+        })
+
+        df.to_sql('groups', con=engine, if_exists='append', index=False)
+
+        return {"history_Id": history_Id}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 # -------------------------
@@ -217,3 +254,7 @@ def get_departure_details(trip_id: str = Query(...)):
 
     except Exception as e:
         return {"error": str(e)}
+
+
+
+
