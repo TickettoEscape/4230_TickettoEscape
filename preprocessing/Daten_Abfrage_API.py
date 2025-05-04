@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
+from sqlalchemy import text
 from pydantic import BaseModel
 from datetime import datetime, timedelta
-from typing import List
+from typing import List, Optional
 import pandas as pd
 import random
+
+
 
 # Initialize app
 app = FastAPI()
@@ -20,7 +23,7 @@ app.add_middleware(
 )
 
 # Database connection
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
 engine = create_engine(db_connection_url)
 
 # -------------------------
@@ -44,19 +47,21 @@ class GroupCreateRequest(BaseModel):
     group_name: str
     role: str
 
+
 class GroupInputHistory(BaseModel):
-    group_id: int
-    game_id: int
-    from_stop: str
-    from_stop: str
-    login_time: str
-    logout_time: str
-    departure_time: str
-    trip_id: str
-    to_stop: str
-    arrival_time: str
-    send_stop: bool
-    send_trip: bool
+    history_id: Optional[int] = None
+    group_id: Optional[int] = None
+    game_id: Optional[int] = None
+    from_stop: Optional[str] = None
+    login_time: Optional[str] = None
+    logout_time: Optional[str] = None
+    departure_time: Optional[str] = None
+    trip_id: Optional[str] = None
+    to_stop: Optional[str] = None
+    arrival_time: Optional[str] = None
+    send_stop: Optional[bool] = None
+    send_trip: Optional[bool] = None
+
 
 # -------------------------
 # Game Routes
@@ -125,28 +130,104 @@ def create_group(data: GroupCreateRequest):
         return {"error": str(e)}
 
 
-@app.post("/api/history")
+@app.post("/api/history/anmelden")
 def alter_history(data: GroupInputHistory):
     try:
-        df = pd.DataFrame({
+        anmelden_df = pd.DataFrame({
             'group_id': [data.group_id],
             'game_id': [data.game_id],
             'from_stop': [data.from_stop],
             'login_time': [data.login_time],
-            'logout_time': [data.logout_time],
-            'departure_time': [data.departure_time],
-            'trip_id': [data.trip_id],
             'to_stop': [data.to_stop],
-            'arrival_time': [data.arrival_time],
-            'send_stop': [data.send_stop],
-            'send_trip': [data.send_trip],
+            'arrival_time': [data.arrival_time]            
         })
 
-        df.to_sql('groups', con=engine, if_exists='append', index=False)
+        anmelden_df.to_sql('history', con=engine, if_exists='append', index=False)
+        history_query = f"""
+            SELECT * FROM history
+            WHERE group_id = '{data.group_id}' AND game_id = '{data.game_id}'
+            ORDER BY history_id DESC
+            LIMIT 1
+        """
 
-        return {"history_Id": history_Id}
+        result_df = pd.read_sql_query(history_query, engine)
+        history_id=int(result_df['history_id'].iloc[0])
+        return {"historyId": history_id}
     except Exception as e:
         return {"error": str(e)}
+
+
+@app.post("/api/history/rout_select")
+def alter_history(data: GroupInputHistory):
+    try:
+        # Debugging - Print the incoming data
+        print("Received data:", data)
+        send_trip = bool(data.send_trip)
+        print("Converted send_trip:", send_trip)
+
+        update_query = text("""
+            UPDATE history
+            SET departure_time = :departure_time,
+                trip_id = :trip_id,
+                send_trip = :send_trip
+            WHERE history_id = :history_id
+        """)
+
+        with engine.connect() as conn:
+            conn.execute(update_query, {
+                'departure_time': data.departure_time,
+                'trip_id': data.trip_id,
+                'history_id': data.history_id, 
+                'send_trip': send_trip
+            })
+            conn.commit()
+
+        return {"status": "success"}
+
+    except Exception as e:
+        # Debugging - Print the error
+        print("Error:", e)
+        return {"error": str(e)}
+
+
+
+@app.post("/api/history/abmelden")
+def alter_history(data: GroupInputHistory):
+    try:
+        # Ensure correct boolean type
+        send_stop = bool(data.send_stop)
+        send_trip = bool(data.send_trip)
+
+        update_query = text("""
+            UPDATE history
+            SET logout_time = :logout_time,
+                send_stop = :send_stop,
+                send_trip = :send_trip
+            WHERE history_id = :history_id
+        """)
+
+        with engine.connect() as conn:
+            conn.execute(update_query, {
+                'logout_time': data.logout_time,
+                'send_stop': send_stop,
+                'send_trip': send_trip,
+                'history_id': data.history_id
+            })
+            conn.commit()
+
+        return {"status": "success"}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+
+
+        
+            
+
+
+
 
 
 # -------------------------

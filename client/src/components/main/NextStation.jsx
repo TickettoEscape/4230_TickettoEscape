@@ -71,9 +71,50 @@ export const NextStation = ({ setSelectedStop }) => {
     )
     .sort((a, b) => a.stop_name.localeCompare(b.stop_name));
 
-  const handleSelect = (station) => {
-    setSelectedStop(station);
-    navigate("/connections");
+  const handleSelect = async (station) => {
+    try {
+      setSelectedStop(station);
+
+      // Retrieve required values
+      const groupId = parseInt(localStorage.getItem("group_id"));
+      const gameId = parseInt(localStorage.getItem("gameId"));
+      const now = new Date();
+      const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
+
+      const payload = {
+        group_id: groupId,
+        game_id: gameId,
+        from_stop: station.stop_name,
+        to_stop: station.stop_name,
+        login_time: timeOnly,
+        arrival_time: timeOnly,
+      };
+
+      console.log("Payload for station selection:", payload);
+
+      // Send POST request
+      const response = await fetch(
+        "http://localhost:8000/api/history/anmelden",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.historyId) {
+        localStorage.setItem("history_id", data.historyId);
+        navigate("/connections");
+      } else {
+        console.error("No historyId returned", data);
+      }
+    } catch (error) {
+      console.error("Error during station selection:", error);
+    }
   };
 
   return (

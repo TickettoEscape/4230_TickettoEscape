@@ -109,32 +109,71 @@ engine = create_engine(db_connection_url)
 from datetime import time
 import pandas as pd
 
-# Create the DataFrame
-df = pd.DataFrame({
+# # Create the DataFrame
+# anmelden_df = pd.DataFrame({
+#     'group_id': [1],
+#     'game_id': [101],
+#     'from_stop': ['Central Station'],
+#     'login_time': [time(8, 15)],
+#     'to_stop': ['North Park'],
+#     'arrival_time': [time(9, 30)]
+# })
+
+# routeSelect_df = pd.DataFrame({
+#     'group_id': [1],
+#     'game_id': [101],
+#     'departure_time': [time(8, 50)],
+#     'trip_id': ['TRIP123'],
+#     'send_trip': [True]
+# })
+
+abmelden_df = pd.DataFrame({
     'group_id': [1],
-    'fame_id': [101],  # Correct column name
-    'from_stop': ['Central Station'],
-    'login_time': [time(8, 15)],
-    'logout_time': [time(8, 45)],
-    'departure_time': [time(8, 50)],
-    'trip_id': ['TRIP123'],
-    'to_stop': ['North Park'],
-    'arrival_time': [time(9, 30)],
-    'send_stop': [True],
-    'send_trip': [True]
+    'game_id': [101],    
+    'logout_time': [time(9, 30)],
+    'send_stop': [True]
 })
 
-# Insert into 'history' table
-df.to_sql('history', con=engine, if_exists='append', index=False)
+# # Insert into 'history' table
+# # anmelden_df.to_sql('history', con=engine, if_exists='append', index=False)
 
-# Query to get the inserted record
+# # routeSelect_df.to_sql('history', con=engine, if_exists='append', index=False)
+
+# abmelden_df.to_sql('history', con=engine, if_exists='append', index=False)
+
+from sqlalchemy import text
+
+# # Extract values from the DataFrame
+# logout_time = abmelden_df['logout_time'].iloc[0]
+# send_stop = bool(abmelden_df['send_stop'].iloc[0])
+
+
+
+# # Write the SQL UPDATE query
+# update_query = text("""
+#     UPDATE history
+#     SET logout_time = :logout_time,
+#         send_stop = :send_stop
+#     WHERE history_id = :history_id
+# """)
+
+# # Execute the query
+# with engine.connect() as conn:
+#     conn.execute(update_query, {
+#         'logout_time': logout_time,
+#         'send_stop': send_stop,
+#         'history_id': 11
+#     })
+#     conn.commit()
+
+
 history_query = """
     SELECT * FROM history
-    WHERE group_id = 1 AND fame_id = 101
-    ORDER BY history_id ASC
+    WHERE group_id = 1 AND game_id = 101
+    ORDER BY history_id DESC
     LIMIT 1
 """
 
-# Run query and print result
 result_df = pd.read_sql_query(history_query, engine)
-print(result_df)
+print(result_df['history_id'].iloc[0])
+

@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import "../../App.css";
-import { useNavigate } from "react-router-dom";
+
+// Custom hook to handle send_trip state and Polizei popup logic
+const useSendTrip = () => {
+  const [sendTrip, setSendTrip] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("role") === "Polizei") {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleDecision = (decision) => {
+    setSendTrip(decision === "ja");
+    setShowPopup(false);
+  };
+
+  return { sendTrip, showPopup, handleDecision };
+};
 
 export const TripDetails = () => {
   const [routeName, setRouteName] = useState("");
@@ -12,17 +30,53 @@ export const TripDetails = () => {
   const [stopTimes, setStopTimes] = useState([]);
   const [selectedRoute, setSelectedRoute] = useState(true);
   const navigate = useNavigate();
-  // Getting tripId from the URL query parameters
+
   const [searchParams] = useSearchParams();
   const tripId = searchParams.get("tripId");
 
-  const RouteSpeichern = () => {
-    console.log("Route gespeichert!");
-    setSelectedRoute(false); // an App übergeben
+  const { sendTrip, showPopup, handleDecision } = useSendTrip();
+
+  const RouteSpeichern = async (stop) => {
+    const historyId = parseInt(localStorage.getItem("history_id"));
+    const tripId = localStorage.getItem("selectedTripId");
+    const departureTime = stop.departure_time;
+
+    const payload = {
+      trip_id: tripId,
+      departure_time: departureTime,
+      history_id: historyId,
+      send_trip: sendTrip,
+    };
+
+    console.log("Sending route selection payload:", payload);
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/history/rout_select",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        console.log("✅ Route successfully saved.");
+        setSelectedRoute(false);
+      } else {
+        console.error("❌ Error response:", data);
+      }
+    } catch (err) {
+      console.error("❌ Failed to save route:", err);
+    }
   };
 
   const BahnhofAbmelden = () => {
-    console.log("vom Bahnhof abgemedlet"); // an App übergeben
+    console.log("vom Bahnhof abgemedlet");
     navigate("/nextStation");
   };
 
@@ -36,7 +90,6 @@ export const TripDetails = () => {
   useEffect(() => {
     if (!tripId) return;
 
-    // Save to localStorage
     localStorage.setItem("selectedTripId", tripId);
 
     const fetchTripDetails = async () => {
@@ -77,16 +130,14 @@ export const TripDetails = () => {
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
-            position: "relative", // wichtig
+            position: "relative",
           }}
         >
-          {/* Fixer Titel */}
           <div
             style={{
               color: "#b20000",
               textAlign: "center",
               fontSize: "18px",
-              // marginBottom: "10px",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -102,7 +153,6 @@ export const TripDetails = () => {
               : "Fahrplan dieser Verbindung"}
           </div>
 
-          {/* Scrollbarer Bereich */}
           {loading ? (
             <p style={{ textAlign: "center" }}>Lade Daten...</p>
           ) : (
@@ -150,6 +200,32 @@ export const TripDetails = () => {
           <button onClick={BahnhofAbmelden} disabled={selectedRoute}>
             von Bahnhof abmelden
           </button>
+
+          {showPopup && (
+            <div className="popup-overlay">
+              <div className="popup-content">
+                <div className="popup-header">
+                  <span
+                    onClick={() => handleDecision("nein")}
+                    className="close-button"
+                  >
+                    ✕
+                  </span>
+                </div>
+                <p style={{ marginBottom: "12px" }}>Trip teilen?</p>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <button onClick={() => handleDecision("ja")}>Ja</button>
+                  <button onClick={() => handleDecision("nein")}>Nein</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <Footer />

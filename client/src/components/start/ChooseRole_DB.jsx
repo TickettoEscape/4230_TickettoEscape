@@ -20,6 +20,7 @@ export const ChooseRole = () => {
         const data = await res.json();
         console.log("Räuber check result:", data);
         setIsRauberDisabled(data); // Disable if taken
+        localStorage.setItem("rauber", data); // Store in local storage
       } catch (err) {
         console.error("Error checking 'Räuber' role:", err);
       }
