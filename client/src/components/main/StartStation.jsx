@@ -42,7 +42,6 @@ export const StartStation = ({ setSelectedStop }) => {
         group_id: groupId,
         game_id: gameId,
         from_stop: station.stop_name,
-        to_stop: station.stop_name,
         login_time: timeOnly,
         arrival_time: timeOnly,
       };

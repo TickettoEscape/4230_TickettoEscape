@@ -39,7 +39,7 @@ export const TripDetails = () => {
   const RouteSpeichern = async (stop) => {
     const historyId = parseInt(localStorage.getItem("history_id"));
     const tripId = localStorage.getItem("selectedTripId");
-    const departureTime = stop.departure_time;
+    const departureTime = localStorage.getItem("dep_time");
 
     const payload = {
       trip_id: tripId,
@@ -75,9 +75,43 @@ export const TripDetails = () => {
     }
   };
 
-  const BahnhofAbmelden = () => {
-    console.log("vom Bahnhof abgemedlet");
-    navigate("/nextStation");
+  const BahnhofAbmelden = async () => {
+    const historyId = parseInt(localStorage.getItem("history_id"));
+    const now = new Date();
+    const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
+    const sendStop = true; // or false, depending on your logic
+
+    const payload = {
+      history_id: historyId,
+      logout_time: timeOnly,
+      send_stop: sendStop,
+    };
+
+    console.log("📤 Sending logout payload:", payload);
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/history/abmelden",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        console.log("✅ Successfully abgemeldet.");
+        navigate("/nextStation");
+      } else {
+        console.error("❌ Abmelden failed:", data);
+      }
+    } catch (err) {
+      console.error("❌ Error during abmelden:", err);
+    }
   };
 
   useEffect(() => {

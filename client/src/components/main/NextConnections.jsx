@@ -32,11 +32,12 @@ export const NextConnections = ({ selectedStop }) => {
 
   const displayed = departures.slice(offset, offset + 5);
 
-  const handleRowClick = (tripId) => {
+  const handleRowClick = (tripId, departure_time) => {
     if (!tripId) {
       console.warn("❌ No tripId found!");
       return;
     }
+    localStorage.setItem("dep_time", departure_time);
     navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
   };
 
@@ -71,7 +72,7 @@ export const NextConnections = ({ selectedStop }) => {
                 displayed.map((dep, i) => (
                   <tr
                     key={i}
-                    onClick={() => handleRowClick(dep.tripId)}
+                    onClick={() => handleRowClick(dep.tripId, dep.time)}
                     style={{ cursor: "pointer" }}
                   >
                     <td>{dep.time}</td>

@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 # Database connection
-db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape_DEMO"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
 engine = create_engine(db_connection_url)
 
 # -------------------------
@@ -138,7 +138,6 @@ def alter_history(data: GroupInputHistory):
             'game_id': [data.game_id],
             'from_stop': [data.from_stop],
             'login_time': [data.login_time],
-            'to_stop': [data.to_stop],
             'arrival_time': [data.arrival_time]            
         })
 
@@ -149,6 +148,10 @@ def alter_history(data: GroupInputHistory):
             ORDER BY history_id DESC
             LIMIT 1
         """
+        
+        
+
+
 
         result_df = pd.read_sql_query(history_query, engine)
         history_id=int(result_df['history_id'].iloc[0])
@@ -160,10 +163,9 @@ def alter_history(data: GroupInputHistory):
 @app.post("/api/history/rout_select")
 def alter_history(data: GroupInputHistory):
     try:
-        # Debugging - Print the incoming data
-        print("Received data:", data)
+        
         send_trip = bool(data.send_trip)
-        print("Converted send_trip:", send_trip)
+        
 
         update_query = text("""
             UPDATE history
@@ -196,13 +198,11 @@ def alter_history(data: GroupInputHistory):
     try:
         # Ensure correct boolean type
         send_stop = bool(data.send_stop)
-        send_trip = bool(data.send_trip)
 
         update_query = text("""
             UPDATE history
             SET logout_time = :logout_time,
-                send_stop = :send_stop,
-                send_trip = :send_trip
+                send_stop = :send_stop
             WHERE history_id = :history_id
         """)
 
@@ -210,7 +210,6 @@ def alter_history(data: GroupInputHistory):
             conn.execute(update_query, {
                 'logout_time': data.logout_time,
                 'send_stop': send_stop,
-                'send_trip': send_trip,
                 'history_id': data.history_id
             })
             conn.commit()
