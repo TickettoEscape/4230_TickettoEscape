@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import { Footer } from "../Footer";
 
-// Assign a unique color to each of the 10 groups
+// Define bubble colors for each group
 const groupColors = {
   group1: "#ff6666",
   group2: "#66b3ff",
@@ -16,7 +16,7 @@ const groupColors = {
   group10: "#ffb3b3",
 };
 
-// Sample JSON data defined inline
+// Example JSON messages (simulated)
 const sampleMessages = [
   {
     groupId: "group1",
@@ -58,11 +58,11 @@ const sampleMessages = [
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
 
-  // Use group_id from localStorage (simulate default if not present)
+  // Get the user's group ID from localStorage (default to group1)
   const myGroupId = localStorage.getItem("group_id") || "group1";
 
   useEffect(() => {
-    // Simulate loading + sort messages by time
+    // Sort messages by time
     const sorted = [...sampleMessages].sort(
       (a, b) => new Date(a.time) - new Date(b.time)
     );
@@ -71,15 +71,12 @@ export const Chat = () => {
 
   return (
     <div className="page" style={{ padding: "20px" }}>
-      <h2>Train Hunt Tracker</h2>
-
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          maxWidth: "600px",
-          margin: "0 auto",
+          width: "100%", // ensures full width usage
         }}
       >
         {messages.map((msg, index) => {
@@ -102,6 +99,7 @@ export const Chat = () => {
                   padding: "10px 15px",
                   maxWidth: "70%",
                   textAlign: isMine ? "right" : "left",
+                  margin: "2px 10px",
                 }}
               >
                 <div style={{ fontWeight: "bold", marginBottom: "4px" }}>
