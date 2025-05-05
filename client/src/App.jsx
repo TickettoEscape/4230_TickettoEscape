@@ -14,6 +14,7 @@ import { Infos } from "./components/main/Infos";
 import { NextConnections } from "./components/main/NextConnections";
 import { TripDetails } from "./components/main/TripDetails";
 import { NextStation } from "./components/main/NextStation";
+import { Chat } from "./components/main/Chat";
 
 function App() {
   const [selectedStop, setSelectedStop] = useState(null); // Zentraler Zustand für den Bahnhof
@@ -27,6 +28,7 @@ function App() {
       <Route path="/rules" element={<Rules />} />
       <Route path="/waiting" element={<WaitingRoom />} />
       <Route path="/infos" element={<Infos />} />
+      <Route path="/chat" element={<Chat />} />
       <Route
         path="/startstation"
         element={<StartStation setSelectedStop={setSelectedStop} />}
