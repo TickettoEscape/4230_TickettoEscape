@@ -1,4 +1,4 @@
-Ticket to Escape
+# GDI Projekt
 
 Das ist die Projekt Website des *GDI Projekts*. Das GDI enthält eine Server und eine Client Umgebung.
 - Server: FastAPI
