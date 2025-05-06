@@ -1,9 +1,27 @@
-# GDI Projekt
+<a id="top"></a>
 
-Das ist die Projekt Website des *GDI Projekts*. Das GDI enthält eine Server und eine Client Umgebung.
-- Server: FastAPI
-- Client: React + OpenLayers
+# Ticket to Escape
 
-GitHub Repository: [https://github.com/314a/GDI_Project](https://github.com/314a/GDI_Project)
+Willkommen auf der GitHub-Page der Geodateninfarastruktur Ticket to Escape. Auf dieser Seite finden sie alle Informationen zu der Umsetzung der WebApp.
 
-![GDI Projekt Screenshot](screenshot.png)
+GitHub Repository: [https://github.com/TickettoEscape/4230_TickettoEscape](https://github.com/TickettoEscape/4230_TickettoEscape)
+
+### Ansicht der Startseite
+![GDI Projekt Screenshot](Bilder/Startpage1.png)
+
+#### Projektteam
+- [Manuel Aebi](https://github.com/AebiM)
+- [Vania Fernandes Pereira](https://github.com/VaniaPereira01)
+- [Scan Uythoven](https://github.com/SvenUythoven)
+
+
+[↑](#top)
+
+
+<div style="display: flex; justify-content: space-between;">
+  <div>
+  </div>
+  <div>
+    <a href="einleitung.html">Konzept und Ideen →</a>
+  </div>
+</div>

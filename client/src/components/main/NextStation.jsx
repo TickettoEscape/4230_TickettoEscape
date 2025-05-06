@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const NextStation = ({ setSelectedStop }) => {
   const [stations, setStations] = useState([]);
@@ -12,6 +12,12 @@ export const NextStation = ({ setSelectedStop }) => {
   const [loading, setLoading] = useState(false);
   const tripId = localStorage.getItem("selectedTripId");
   const navigate = useNavigate();
+  const location = useLocation()
+  
+    useEffect(() => {
+      localStorage.setItem("gamePath", location.pathname);
+    }, [location.pathname]);
+  
 
   useEffect(() => {
     fetch("/stops_parent.json")
