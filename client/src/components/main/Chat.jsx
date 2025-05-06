@@ -22,7 +22,8 @@ export const Chat = () => {
   useEffect(() => {
     const fetchDepartures = async () => {
       try {
-        const game_id = localStorage.getItem("game_id");
+        const game_id = localStorage.getItem("gameId");
+        console.log("Game ID:", game_id);
         if (!game_id) return;
 
         const res = await fetch(

@@ -7,7 +7,7 @@ export const StartStation = ({ setSelectedStop }) => {
   const [stations, setStations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem("gamePath", location.pathname);
@@ -43,13 +43,14 @@ export const StartStation = ({ setSelectedStop }) => {
       const now = new Date();
       const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
 
-
       const payload = {
         group_id: groupId,
         game_id: gameId,
         from_stop: station.stop_name,
         login_time: timeOnly,
         arrival_time: timeOnly,
+        send_stop: true,
+        send_trip: true,
       };
 
       console.log("Payload for station selection:", payload);
