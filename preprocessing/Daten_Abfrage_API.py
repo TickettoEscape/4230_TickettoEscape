@@ -229,51 +229,54 @@ def alter_history(data: GroupInputHistory):
 def chat(game_id: int = Query(...)):
     try:
         query = f"""
-        SELECT 
-            g.group_name,
-            h.group_id, 
-            g.role,
-            h.login_time AS time,
-            h.login_time || ' angemeldet an Bahnhof ' || h.from_stop AS Chat_Nachricht
-        FROM History h
-        JOIN groups g ON h.group_id = g.group_id
-        JOIN trips t ON h.trip_id = t.trip_id
-        JOIN routes r ON t.route_id = r.route_id
-        WHERE h.send_stop = 'true' AND h.game_id = '{game_id}'
+        SELECT * From (
+                Select
+                    g.group_name,
+                    h.group_id, 
+                    g.role, 
+                    h.departure_time AS time,  -- Ensure this column is named 'time' for consistency
+                    h.departure_time || ' ' || r.route_short_name || ' Richtung ' || t.trip_headsign AS Chat_Nachricht
+                FROM History h
+                JOIN groups g ON h.group_id = g.group_id
+                JOIN trips t ON h.trip_id = t.trip_id
+                JOIN routes r ON t.route_id = r.route_id
+                WHERE h.send_trip = 'true' AND h.game_id = '{game_id}' AND g.role = 'Polizei'
+                
+                UNION ALL  
 
-        UNION ALL
+                SELECT 
+                    g.group_name,
+                    h.group_id, 
+                    g.role,
+                    h.login_time AS time,
+                    h.login_time || ' angemeldet an Bahnhof ' || h.from_stop AS Chat_Nachricht
+                FROM History h
+                JOIN groups g ON h.group_id = g.group_id
+                WHERE h.send_stop = 'true' 
+                AND h.game_id = '{game_id}'
 
-        SELECT 
-            g.group_name,
-            h.group_id, 
-            g.role, 
-            h.logout_time AS time,
-            h.logout_time || ' abgemeldet von Bahnhof ' || h.from_stop AS Chat_Nachricht
-        FROM History h
-        JOIN groups g ON h.group_id = g.group_id
-        JOIN trips t ON h.trip_id = t.trip_id
-        JOIN routes r ON t.route_id = r.route_id
-        WHERE h.game_id = '{game_id}' AND g.role = 'Räuber'
 
-        UNION ALL
+                UNION ALL
 
-        SELECT 
-            g.group_name,
-            h.group_id, 
-            g.role, 
-            h.departure_time AS time,  -- Ensure this column is named 'time' for consistency
-            h.departure_time || ' ' || r.route_short_name || ' Richtung ' || t.trip_headsign AS Chat_Nachricht
-        FROM History h
-        JOIN groups g ON h.group_id = g.group_id
-        JOIN trips t ON h.trip_id = t.trip_id
-        JOIN routes r ON t.route_id = r.route_id
-        WHERE h.send_trip = 'true' AND h.game_id = '{game_id}' AND g.role = 'Polizei'
-
+                SELECT 
+                    g.group_name,
+                    h.group_id, 
+                    g.role, 
+                    h.logout_time AS time,
+                    h.logout_time || ' abgemeldet von Bahnhof ' || h.from_stop AS Chat_Nachricht
+                FROM History h
+                JOIN groups g ON h.group_id = g.group_id
+                WHERE h.game_id = '{game_id}' AND g.role = 'Räuber'
+        ) AS combined
+        WHERE Chat_Nachricht IS NOT NULL
         ORDER BY time;
 
         """
+        
         df = pd.read_sql_query(query, engine)
         
+
+
         return df.to_dict(orient='records')
     except Exception as e:
         return {"error": str(e)}
