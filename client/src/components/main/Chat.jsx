@@ -2,129 +2,102 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import { Footer } from "../Footer";
 
-// Define bubble colors for each group
-const groupColors = {
-  group1: "#ff6666",
-  group2: "#66b3ff",
-  group3: "#99ff99",
-  group4: "#ffcc99",
-  group5: "#cc99ff",
-  group6: "#ffff99",
-  group7: "#66ffcc",
-  group8: "#ff99cc",
-  group9: "#aaffc3",
-  group10: "#ffb3b3",
-};
-
-// Example JSON messages (simulated)
-const sampleMessages = [
-  {
-    groupId: "group1",
-    groupName: "Shadow Express",
-    location: "Central Yard",
-    trip: null,
-    time: "2025-05-05T12:01:00Z",
-  },
-  {
-    groupId: "group2",
-    groupName: "Tunnel Rats",
-    location: "Old Station",
-    trip: null,
-    time: "2025-05-05T12:03:00Z",
-  },
-  {
-    groupId: "group3",
-    groupName: "Steel Bandits",
-    location: null,
-    trip: "From Cargo Bay to Platform 8",
-    time: "2025-05-05T12:05:00Z",
-  },
-  {
-    groupId: "group1",
-    groupName: "Shadow Express",
-    location: null,
-    trip: "To Supply Depot",
-    time: "2025-05-05T12:10:00Z",
-  },
-  {
-    groupId: "group4",
-    groupName: "The Rust Hawks",
-    location: "East Engine Block",
-    trip: null,
-    time: "2025-05-05T12:12:00Z",
-  },
+const groupColors = [
+  "#FFD700",
+  "#87CEFA",
+  "#90EE90",
+  "#FFB6C1",
+  "#DDA0DD",
+  "#FFA07A",
+  "#40E0D0",
+  "#F08080",
+  "#D3D3D3",
+  "#FA8072",
 ];
 
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
-
-  // Get the user's group ID from localStorage (default to group1)
-  const myGroupId = localStorage.getItem("group_id") || "group1";
+  const myGroupid = localStorage.getItem("group_id") || "My Group";
 
   useEffect(() => {
-    // Sort messages by time
-    const sorted = [...sampleMessages].sort(
-      (a, b) => new Date(a.time) - new Date(b.time)
-    );
-    setMessages(sorted);
+    const fetchDepartures = async () => {
+      try {
+        const game_id = localStorage.getItem("gameId");
+        console.log("Game ID:", game_id);
+        if (!game_id) return;
+
+        const res = await fetch(
+          `http://localhost:8000/api/chat?game_id=${encodeURIComponent(
+            game_id
+          )}`
+        );
+        const data = await res.json();
+
+        // Sort by time
+        const sorted = data.sort((a, b) => a.time.localeCompare(b.time));
+        setMessages(sorted);
+      } catch (err) {
+        console.error("Fehler beim Laden:", err);
+      }
+    };
+
+    fetchDepartures();
   }, []);
 
+  // Assign colors per group name
+  const groupColorMap = {};
+  let colorIndex = 0;
+  messages.forEach(({ group_name }) => {
+    if (!groupColorMap[group_name]) {
+      groupColorMap[group_name] = groupColors[colorIndex % groupColors.length];
+      colorIndex++;
+    }
+  });
+
   return (
-    <div className="page" style={{ padding: "20px" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <div
         style={{
+          flexGrow: 1,
+          overflowY: "auto",
+          padding: "1rem",
+          fontFamily: "sans-serif",
           display: "flex",
           flexDirection: "column",
-          gap: "10px",
-          width: "100%", // ensures full width usage
+          gap: "0.5rem",
         }}
       >
         {messages.map((msg, index) => {
-          const isMine = msg.groupId === myGroupId;
-          const messageText = msg.location || msg.trip || "No info";
-          const bubbleColor = groupColors[msg.groupId] || "#ddd";
+          const isMine = msg.group_id === myGroupid;
+          const alignment = isMine ? "flex-end" : "flex-start";
+          const bubbleColor = groupColorMap[msg.group_name];
 
           return (
             <div
               key={index}
-              style={{
-                display: "flex",
-                justifyContent: isMine ? "flex-end" : "flex-start",
-              }}
+              style={{ display: "flex", justifyContent: alignment }}
             >
               <div
                 style={{
                   backgroundColor: bubbleColor,
-                  borderRadius: "15px",
-                  padding: "10px 15px",
+                  color: "#000",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "1rem",
                   maxWidth: "70%",
-                  textAlign: isMine ? "right" : "left",
-                  margin: "2px 10px",
+                  wordBreak: "break-word",
+                  boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
+                  textAlign: "left",
                 }}
               >
-                <div style={{ fontWeight: "bold", marginBottom: "4px" }}>
-                  {msg.groupName}
-                </div>
-                <div>{messageText}</div>
-                <div
-                  style={{
-                    fontSize: "0.8em",
-                    marginTop: "4px",
-                    color: "#444",
-                    opacity: 0.6,
-                  }}
-                >
-                  {new Date(msg.time).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </div>
+                <strong>{msg.group_name}</strong>
+                <div>{msg.chat_nachricht}</div>
               </div>
             </div>
           );
         })}
       </div>
 
+      {/* ✅ Footer restored */}
       <Footer />
     </div>
   );

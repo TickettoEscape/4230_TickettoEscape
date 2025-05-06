@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import text
 from pydantic import BaseModel
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import  Optional
 import pandas as pd
 import random
 
@@ -143,19 +143,20 @@ def alter_history(data: GroupInputHistory):
         })
 
         anmelden_df.to_sql('history', con=engine, if_exists='append', index=False)
+        
         history_query = f"""
             SELECT * FROM history
             WHERE group_id = '{data.group_id}' AND game_id = '{data.game_id}'
             ORDER BY history_id DESC
             LIMIT 1
         """
-        
-        
+             
 
 
 
         result_df = pd.read_sql_query(history_query, engine)
         history_id=int(result_df['history_id'].iloc[0])
+        
         return {"historyId": history_id}
     except Exception as e:
         return {"error": str(e)}
@@ -217,6 +218,63 @@ def alter_history(data: GroupInputHistory):
 
         return {"status": "success"}
 
+    except Exception as e:
+        return {"error": str(e)}
+
+
+
+
+
+@app.get("/api/chat")
+def chat(game_id: int = Query(...)):
+    try:
+        query = f"""
+        SELECT 
+            g.group_name,
+            h.group_id, 
+            g.role,
+            h.login_time AS time,
+            h.login_time || ' angemeldet an Bahnhof ' || h.from_stop AS Chat_Nachricht
+        FROM History h
+        JOIN groups g ON h.group_id = g.group_id
+        JOIN trips t ON h.trip_id = t.trip_id
+        JOIN routes r ON t.route_id = r.route_id
+        WHERE h.send_stop = 'true' AND h.game_id = '{game_id}'
+
+        UNION ALL
+
+        SELECT 
+            g.group_name,
+            h.group_id, 
+            g.role, 
+            h.logout_time AS time,
+            h.logout_time || ' abgemeldet von Bahnhof ' || h.from_stop AS Chat_Nachricht
+        FROM History h
+        JOIN groups g ON h.group_id = g.group_id
+        JOIN trips t ON h.trip_id = t.trip_id
+        JOIN routes r ON t.route_id = r.route_id
+        WHERE h.game_id = '{game_id}' AND g.role = 'Räuber'
+
+        UNION ALL
+
+        SELECT 
+            g.group_name,
+            h.group_id, 
+            g.role, 
+            h.departure_time AS time,  -- Ensure this column is named 'time' for consistency
+            h.departure_time || ' ' || r.route_short_name || ' Richtung ' || t.trip_headsign AS Chat_Nachricht
+        FROM History h
+        JOIN groups g ON h.group_id = g.group_id
+        JOIN trips t ON h.trip_id = t.trip_id
+        JOIN routes r ON t.route_id = r.route_id
+        WHERE h.send_trip = 'true' AND h.game_id = '{game_id}' AND g.role = 'Polizei'
+
+        ORDER BY time;
+
+        """
+        df = pd.read_sql_query(query, engine)
+        
+        return df.to_dict(orient='records')
     except Exception as e:
         return {"error": str(e)}
 
@@ -297,7 +355,6 @@ def get_departures(stop_name: str = Query(...)):
         df = pd.read_sql_query(Combined_Query, engine)
         df['platform'] = df['stop_id'].fillna('').astype(str).str.split(':').str[-1]
         df['time'] = df['departure_time'].fillna('').astype(str).str.slice(0, 5)
-
         df.rename(columns={"trip_id": "tripId"}, inplace=True)
         df = df.drop(columns=['stop_id', 'departure_time', 'route_id', 'service_id'])
         df = df.drop_duplicates()
