@@ -57,7 +57,7 @@ export const Rules = () => {
         <div className="form-box">
           {/* Titel und X oben rechts */}
           <h1>Spielregeln</h1>
-          <span onClick={() => navigate("/start")} className="close-top-right">
+          <span onClick={() => navigate("/")} className="close-top-right">
             ✕
           </span>
 

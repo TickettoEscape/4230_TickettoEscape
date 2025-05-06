@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/start" element={<StartScreen />} />
+      <Route path="/" element={<StartScreen />} />
       <Route path="/join" element={<JoinGame />} />
       <Route path="/new" element={<CreateGame />} />
       <Route path="/role" element={<ChooseRole />} />

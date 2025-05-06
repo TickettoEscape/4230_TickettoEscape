@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
 import { Footer } from "../Footer";
+import { Header } from "../Header";
 
 const groupColors = [
-  "#FFD700",
-  "#87CEFA",
-  "#90EE90",
-  "#FFB6C1",
-  "#DDA0DD",
-  "#FFA07A",
-  "#40E0D0",
-  "#F08080",
-  "#D3D3D3",
-  "#FA8072",
+
+  "#FFDFBA", // Apricot
+  "#E5CCFF", // Lavendel
+  "#BAFFC9", // Minzgrün
+  "#BAE1FF", // Babyblau
+  "#FFB3BA", // helles Korallrosa
+  "#FFFFBA", // Blassgelb
+  "#FFCCE5", // Rosa
+  "#C2F0C2", // Grünlich
+  "#FFE6CC", // Pfirsich
+  "#D1C4E9", // helles Violett
 ];
 
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
-  const myGroupid = localStorage.getItem("group_id") || "My Group";
+  const groupName = localStorage.getItem("groupName") || "";
 
   useEffect(() => {
-    const fetchDepartures = async () => {
+    const fetchChat = async () => {
       try {
         const game_id = localStorage.getItem("gameId");
-        console.log("Game ID:", game_id);
         if (!game_id) return;
 
         const res = await fetch(
-          `http://localhost:8000/api/chat?game_id=${encodeURIComponent(
-            game_id
-          )}`
+          `http://localhost:8000/api/chat?game_id=${encodeURIComponent(game_id)}`
         );
         const data = await res.json();
-
-        // Sort by time
         const sorted = data.sort((a, b) => a.time.localeCompare(b.time));
         setMessages(sorted);
       } catch (err) {
@@ -41,63 +38,71 @@ export const Chat = () => {
       }
     };
 
-    fetchDepartures();
+    fetchChat();
   }, []);
 
-  // Assign colors per group name
-  const groupColorMap = {};
-  let colorIndex = 0;
-  messages.forEach(({ group_name }) => {
-    if (!groupColorMap[group_name]) {
-      groupColorMap[group_name] = groupColors[colorIndex % groupColors.length];
-      colorIndex++;
-    }
-  });
+      // Farbzuteilung pro Gruppe
+      const groupColorMap = {};
+      let colorIndex = 0;
+      messages.forEach(({ group_name }) => {
+        if (!groupColorMap[group_name]) {
+          groupColorMap[group_name] = groupColors[colorIndex % groupColors.length];
+          colorIndex++;
+        }
+      });
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <div
-        style={{
-          flexGrow: 1,
-          overflowY: "auto",
-          padding: "1rem",
-          fontFamily: "sans-serif",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
-        }}
-      >
-        {messages.map((msg, index) => {
-          const isMine = msg.group_id === myGroupid;
-          const alignment = isMine ? "flex-end" : "flex-start";
-          const bubbleColor = groupColorMap[msg.group_name];
+      return (
+        <div className="page top-align" style={{ paddingBottom: "50px" }}>
+          <Header />
+          <div className="card" style={{ width: "100%", maxWidth: "420px", marginBottom: "16px" }}>
+            <div className="form-box" style={{
+              height: "calc(100vh - 160px)",
+              overflowY: "auto",
+              padding: "1px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+              backgroundColor: "#011432",
+              borderRadius: "10px",
+            }}>
+              {messages.map((msg, index) => {
+                const isMine = msg.group_name === groupName;
+                const align = isMine ? "flex-end" : "flex-start";
+                const bubbleColor = groupColorMap[msg.group_name];
 
-          return (
-            <div
-              key={index}
-              style={{ display: "flex", justifyContent: alignment }}
-            >
-              <div
-                style={{
-                  backgroundColor: bubbleColor,
-                  color: "#000",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "1rem",
-                  maxWidth: "70%",
-                  wordBreak: "break-word",
-                  boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
-                  textAlign: "left",
-                }}
-              >
-                <strong>{msg.group_name}</strong>
-                <div>{msg.chat_nachricht}</div>
-              </div>
+      return (
+        <div
+          key={index}
+          style={{ display: "flex", justifyContent: align }}
+        >
+          <div
+            style={{
+              backgroundColor: bubbleColor,
+              color: "#011432",
+              padding: "8px 12px",
+              borderRadius: "16px",
+              maxWidth: "69%",
+              fontSize: "14px",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+              textAlign: "left",
+              alignSelf: isMine ? "flex-end" : "flex-start",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <img
+                src={msg.role === "Polizei" ? "/Logo_Polizei_Hut.png" : "/Logo_Raeuber_Augen.png"}
+                alt={msg.role}
+                style={{ height: "18px", width: "23px" }}
+              />
+              <strong>{msg.group_name}</strong>
             </div>
-          );
-        })}
+            <div style={{ marginTop: "4px" }}>{msg.chat_nachricht}</div>
+          </div>
+        </div>
+      );
+    })}
+        </div>
       </div>
-
-      {/* ✅ Footer restored */}
       <Footer />
     </div>
   );
