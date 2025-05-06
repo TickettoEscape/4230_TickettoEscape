@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import "../../App.css";
@@ -8,6 +8,11 @@ import "../../App.css";
 const useSendTrip = () => {
   const [sendTrip, setSendTrip] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem("gamePath", location.pathname + location.search);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     if (localStorage.getItem("role") === "Polizei") {

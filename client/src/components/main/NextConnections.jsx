@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../App.css";
 
 export const NextConnections = ({ selectedStop }) => {
   const [departures, setDepartures] = useState([]);
   const [offset, setOffset] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem("gamePath", location.pathname);
+  }, [location.pathname]);
+
+
 
   useEffect(() => {
     if (!selectedStop) return;

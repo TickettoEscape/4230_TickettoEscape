@@ -10,9 +10,9 @@ export const Footer = () => {
     <div className="footer">
       <div
         className={`footer-icon-wrapper ${
-          location.pathname === "/startstation" ? "active" : ""
+          location.pathname + location.search === localStorage.getItem("gamePath") ? "active" : ""
         }`}
-        onClick={() => navigate("/startstation")}
+        onClick={() => navigate(localStorage.getItem("gamePath"))}
       >
         <img src="/Logo_Zug.png" alt="Verbindungen" className="footer-icon" />
       </div>
