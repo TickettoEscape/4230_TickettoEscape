@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const StartStation = ({ setSelectedStop }) => {
   const [stations, setStations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation()
+
+  useEffect(() => {
+    localStorage.setItem("gamePath", location.pathname);
+  }, [location.pathname]);
 
   // Bahnhöfe laden
   useEffect(() => {
@@ -38,6 +43,7 @@ export const StartStation = ({ setSelectedStop }) => {
       const now = new Date();
       const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
 
+
       const payload = {
         group_id: groupId,
         game_id: gameId,
@@ -64,6 +70,7 @@ export const StartStation = ({ setSelectedStop }) => {
 
       if (data.historyId) {
         localStorage.setItem("history_id", data.historyId);
+        // localStorage.setItem("gramePath", "/connections");
         navigate("/connections");
       } else {
         console.error("No historyId returned", data);
