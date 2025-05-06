@@ -10,9 +10,9 @@ GitHub Repository: [https://github.com/314a/GDI_Project](https://github.com/314a
 ![GDI Projekt Screenshot](Bilder/Startpage1.png)
 
 #### Projektteam
-- [Nando Amport](https://github.com/naamp)
-- [Stefan Sidler](https://github.com/StefanSidler95)
-- [Silvan Baumeler](https://github.com/SilvanBaumeler)
+- [Manuel Aebi](https://github.com/AebiM)
+- [Vania Fernandes Pereira](https://github.com/VaniaPereira01)
+- [Scan Uythoven](https://github.com/SvenUythoven)
 
 
 [↑](#top)

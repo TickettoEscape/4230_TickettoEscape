@@ -1,4 +1,4 @@
-**Projekt Feedback GitHub Pages:** Football Map
+**Projekt Feedback GitHub Pages:** Ticket to Escape
 
 **GitHub Projekt:** Nando Amport, Stefan Sidler, Silvan Baumeler
 
