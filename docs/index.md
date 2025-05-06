@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# GDI Projekt - Ticket to Escape
+# Ticket to Escape
 
-Willkommen auf der GitHub-Page der Geodateninfarastruktur FootballMap. Hier findest du alles über die vorhandenen Funktionen und die Informationen zur Erarbeitung der WebApp.
+Willkommen auf der GitHub-Page der Geodateninfarastruktur Ticket to Escape. Auf dieser Seite finden sie alle Informationen zu der Umsetzung der WebApp.
 
 GitHub Repository: [https://github.com/TickettoEscape/4230_TickettoEscape](https://github.com/TickettoEscape/4230_TickettoEscape)
 
