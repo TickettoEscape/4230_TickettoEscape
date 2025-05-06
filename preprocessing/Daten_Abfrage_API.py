@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import text
 from pydantic import BaseModel
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import  Optional
 import pandas as pd
 import random
 
@@ -223,10 +223,7 @@ def alter_history(data: GroupInputHistory):
 
 
 
-from fastapi import FastAPI, Query
-import pandas as pd
 
-app = FastAPI()
 
 @app.get("/api/chat")
 def chat(game_id: int = Query(...)):
