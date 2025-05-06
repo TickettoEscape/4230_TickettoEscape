@@ -1,43 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ticket to Escape – Produktseite</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; line-height: 1.6; }
+    h1 { color: #0066cc; }
+    img { max-width: 100%; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>🎫 Ticket to Escape</h1>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <h2>Motivation</h2>
+  <p>Diese Anwendung kombiniert spielerisches Lernen mit räumlicher Analyse durch ein Escape-Room-Konzept.</p>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <h2>Features</h2>
+  <ul>
+    <li>Live-Multiplayer-Kommunikation</li>
+    <li>GTFS-basierte Routenplanung</li>
+    <li>Leaflet-Kartenintegration</li>
+    <li>Countdown- und Spiellogik</li>
+  </ul>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <h2>Demovideo</h2>
+  <p><a href="https://www.youtube.com/watch?v=DEIN_VIDEO" target="_blank">YouTube-Link zum Demovideo</a></p>
+
+  <h2>Screenshots</h2>
+  <img src="screenshot.png" alt="Spiel-Screenshot" />
+
+  <h2>Methoden</h2>
+  <p>Technologien: React, Node.js, Socket.io, GTFS, Leaflet</p>
+
+  <h2>Quellen</h2>
+  <ul>
+    <li><a href="https://reactjs.org/">React</a></li>
+    <li><a href="https://leafletjs.com/">Leaflet</a></li>
+    <li><a href="https://developers.google.com/transit/gtfs">GTFS</a></li>
+  </ul>
+
+  <h2>Zur Anwendung</h2>
+  <p><a href="https://tickettoescape.github.io/4230_TickettoEscape/">Live-Demo starten</a></p>
+</body>
 </html>
