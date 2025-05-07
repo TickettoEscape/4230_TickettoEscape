@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { Footer } from "../Footer";
 import "../../App.css";
 
-// Custom hook to handle send_trip state and Polizei popup logic
+// ✅ Custom hook with RouteSpeichern inside
 const useSendTrip = () => {
   const [sendTrip, setSendTrip] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
@@ -14,9 +14,43 @@ const useSendTrip = () => {
     localStorage.setItem("gamePath", location.pathname + location.search);
   }, [location.pathname, location.search]);
 
-  const handleDecision = (decision) => {
-    setSendTrip(decision === "ja");
+  const handleDecision = async (decision) => {
+    const finalSendTrip = decision === "ja";
+    setSendTrip(finalSendTrip);
     setShowPopup(false);
+
+    const historyId = parseInt(localStorage.getItem("history_id"));
+    const tripId = localStorage.getItem("selectedTripId");
+    const departureTime = localStorage.getItem("dep_time");
+
+    const payload = {
+      trip_id: tripId,
+      departure_time: departureTime,
+      history_id: historyId,
+      send_trip: finalSendTrip,
+    };
+
+    console.log("📤 Sending route selection payload:", payload);
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/history/rout_select",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+      if (data.status === "success") {
+        console.log("✅ Route successfully saved.");
+      } else {
+        console.error("❌ Error response:", data);
+      }
+    } catch (err) {
+      console.error("❌ Failed to save route:", err);
+    }
   };
 
   return { sendTrip, showPopup, handleDecision, setShowPopup };
@@ -34,16 +68,15 @@ export const TripDetails = () => {
   const [searchParams] = useSearchParams();
   const tripId = searchParams.get("tripId");
 
-  const { sendTrip, showPopup, handleDecision, setShowPopup } = useSendTrip();
+  const { showPopup, handleDecision, setShowPopup } = useSendTrip();
 
-  // Polizei role popup logic now inside TripDetails
   useEffect(() => {
     if (localStorage.getItem("role") === "Polizei" && selectedRoute === true) {
       setShowPopup(true);
     }
   }, [selectedRoute, setShowPopup]);
 
-  const RouteSpeichern = async (stop) => {
+  const handleRouteSave = async () => {
     const historyId = parseInt(localStorage.getItem("history_id"));
     const tripId = localStorage.getItem("selectedTripId");
     const departureTime = localStorage.getItem("dep_time");
@@ -54,25 +87,22 @@ export const TripDetails = () => {
       trip_id: tripId,
       departure_time: departureTime,
       history_id: historyId,
-      send_trip: sendTrip,
+      send_trip: false,
     };
 
-    console.log("Sending route selection payload:", payload);
+    console.log("📤 Sending default route selection payload:", payload);
 
     try {
       const response = await fetch(
         "http://localhost:8000/api/history/rout_select",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         }
       );
 
       const data = await response.json();
-
       if (data.status === "success") {
         console.log("✅ Route successfully saved.");
       } else {
@@ -86,8 +116,8 @@ export const TripDetails = () => {
   const BahnhofAbmelden = async () => {
     const historyId = parseInt(localStorage.getItem("history_id"));
     const now = new Date();
-    const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
-    const sendStop = true;
+    const timeOnly = now.toTimeString().split(" ")[0];
+    const sendStop = localStorage.getItem("role") === "Räuber" ? true : null;
 
     const payload = {
       history_id: historyId,
@@ -238,7 +268,8 @@ export const TripDetails = () => {
               })}
             </div>
           )}
-          <button onClick={RouteSpeichern} disabled={selectedRoute}>
+
+          <button onClick={handleRouteSave} disabled={selectedRoute}>
             Route Speichern
           </button>
           <button onClick={BahnhofAbmelden} disabled={selectedBahnhof}>

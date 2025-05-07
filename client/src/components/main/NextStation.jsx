@@ -111,7 +111,6 @@ export const NextStation = ({ setSelectedStop }) => {
 
       if (data.historyId) {
         localStorage.setItem("history_id", data.historyId);
-        localStorage.setItem("send_stop", sendStop);
         navigate("/connections");
       } else {
         console.error("No historyId returned", data);

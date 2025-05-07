@@ -139,7 +139,8 @@ def alter_history(data: GroupInputHistory):
             'game_id': [data.game_id],
             'from_stop': [data.from_stop],
             'login_time': [data.login_time],
-            'arrival_time': [data.arrival_time]            
+            'arrival_time': [data.arrival_time],     
+            'send_stop': [data.send_stop]      
         })
 
         anmelden_df.to_sql('history', con=engine, if_exists='append', index=False)
