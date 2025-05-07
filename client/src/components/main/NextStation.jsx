@@ -10,14 +10,15 @@ export const NextStation = ({ setSelectedStop }) => {
   const [routeName, setRouteName] = useState("");
   const [headsign, setHeadsign] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [pendingStation, setPendingStation] = useState(null);
   const tripId = localStorage.getItem("selectedTripId");
   const navigate = useNavigate();
-  const location = useLocation()
-  
-    useEffect(() => {
-      localStorage.setItem("gamePath", location.pathname);
-    }, [location.pathname]);
-  
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem("gamePath", location.pathname);
+  }, [location.pathname]);
 
   useEffect(() => {
     fetch("/stops_parent.json")
@@ -57,7 +58,6 @@ export const NextStation = ({ setSelectedStop }) => {
     fetchTripDetails();
   }, [tripId]);
 
-  // Get the current time in the format HH:mm
   const getCurrentTime = () => {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, "0");
@@ -65,7 +65,6 @@ export const NextStation = ({ setSelectedStop }) => {
     return `${hours}:${minutes}`;
   };
 
-  // Filter the stopTimes array to show only the stops after the current time
   const filteredStopTimes = stopTimes.filter((stop) => {
     const currentTime = getCurrentTime();
     return stop.departure_time > currentTime;
@@ -77,15 +76,14 @@ export const NextStation = ({ setSelectedStop }) => {
     )
     .sort((a, b) => a.stop_name.localeCompare(b.stop_name));
 
-  const handleSelect = async (station) => {
+  const proceedWithSelection = async (station, sendStop) => {
     try {
       setSelectedStop(station);
 
-      // Retrieve required values
       const groupId = parseInt(localStorage.getItem("group_id"));
       const gameId = parseInt(localStorage.getItem("gameId"));
       const now = new Date();
-      const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
+      const timeOnly = now.toTimeString().split(" ")[0];
 
       const payload = {
         group_id: groupId,
@@ -93,11 +91,11 @@ export const NextStation = ({ setSelectedStop }) => {
         from_stop: station.stop_name,
         login_time: timeOnly,
         arrival_time: timeOnly,
+        send_stop: sendStop,
       };
 
       console.log("Payload for station selection:", payload);
 
-      // Send POST request
       const response = await fetch(
         "http://localhost:8000/api/history/anmelden",
         {
@@ -113,12 +111,32 @@ export const NextStation = ({ setSelectedStop }) => {
 
       if (data.historyId) {
         localStorage.setItem("history_id", data.historyId);
+        localStorage.setItem("send_stop", sendStop);
         navigate("/connections");
       } else {
         console.error("No historyId returned", data);
       }
     } catch (error) {
       console.error("Error during station selection:", error);
+    }
+  };
+
+  const handleSelect = (station) => {
+    const isPolizei = localStorage.getItem("role") === "Polizei";
+    if (isPolizei) {
+      setPendingStation(station);
+      setShowPopup(true);
+    } else {
+      proceedWithSelection(station, true);
+    }
+  };
+
+  const handleDecision = (decision) => {
+    setShowPopup(false);
+    const sendStop = decision === "ja";
+    if (pendingStation) {
+      proceedWithSelection(pendingStation, sendStop);
+      setPendingStation(null);
     }
   };
 
@@ -140,7 +158,6 @@ export const NextStation = ({ setSelectedStop }) => {
             position: "relative",
           }}
         >
-          {/* Title */}
           <div
             style={{
               color: "#b20000",
@@ -168,7 +185,6 @@ export const NextStation = ({ setSelectedStop }) => {
             )}
           </div>
 
-          {/* Timeline */}
           {loading ? (
             <p style={{ textAlign: "center" }}>Lade Daten...</p>
           ) : (
@@ -183,16 +199,15 @@ export const NextStation = ({ setSelectedStop }) => {
             >
               {filteredStopTimes.map((stop, index) => {
                 const time = stop.departure_time.slice(0, 5);
-                const isSelected = stop.stop_name.includes(tripId);
                 const isFirst = index === 0;
                 const isLast = index === filteredStopTimes.length - 1;
 
                 return (
                   <div
                     key={index}
-                    className={`timeline-entry ${
-                      isSelected ? "selected" : ""
-                    } ${isFirst ? "first" : ""} ${isLast ? "last" : ""}`}
+                    className={`timeline-entry ${isFirst ? "first" : ""} ${
+                      isLast ? "last" : ""
+                    }`}
                   >
                     <div
                       className="time"
@@ -213,7 +228,6 @@ export const NextStation = ({ setSelectedStop }) => {
             </div>
           )}
 
-          {/* Station Search */}
           <div className="form-box">
             <label htmlFor="search">Nächster Bahnhof eingeben</label>
             <input
@@ -246,6 +260,29 @@ export const NextStation = ({ setSelectedStop }) => {
         </div>
       </div>
       <Footer />
+
+      {/* Polizei popup */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <div className="popup-header">
+              <span
+                onClick={() => handleDecision("nein")}
+                className="close-button"
+              >
+                ✕
+              </span>
+            </div>
+            <p style={{ marginBottom: "12px" }}>Bahnhof im Chat speichern?</p>
+            <div
+              style={{ display: "flex", gap: "10px", justifyContent: "center" }}
+            >
+              <button onClick={() => handleDecision("ja")}>Ja</button>
+              <button onClick={() => handleDecision("nein")}>Nein</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,17 +4,41 @@ import { Header } from "../Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../App.css";
 
-export const NextConnections = ({ selectedStop }) => {
-  const [departures, setDepartures] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const navigate = useNavigate();
+// Custom hook for popup & send_stop handling
+const useSendStop = () => {
+  const [sendStop, setSendStop] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [pendingTrip, setPendingTrip] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem("gamePath", location.pathname);
   }, [location.pathname]);
 
+  const handleDecision = (decision) => {
+    const finalSendStop = decision === "ja";
+    setSendStop(finalSendStop);
+    setShowPopup(false);
 
+    if (pendingTrip) {
+      const { tripId, departure_time, navigate } = pendingTrip;
+      localStorage.setItem("dep_time", departure_time);
+      localStorage.setItem("send_stop", finalSendStop);
+      navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
+      setPendingTrip(null);
+    }
+  };
+
+  return { sendStop, showPopup, handleDecision, setShowPopup, setPendingTrip };
+};
+
+export const NextConnections = ({ selectedStop }) => {
+  const [departures, setDepartures] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const navigate = useNavigate();
+
+  const { sendStop, showPopup, handleDecision, setShowPopup, setPendingTrip } =
+    useSendStop();
 
   useEffect(() => {
     if (!selectedStop) return;
@@ -44,8 +68,17 @@ export const NextConnections = ({ selectedStop }) => {
       console.warn("❌ No tripId found!");
       return;
     }
-    localStorage.setItem("dep_time", departure_time);
-    navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
+
+    const isPolizei = localStorage.getItem("role") === "Polizei";
+
+    if (isPolizei) {
+      setPendingTrip({ tripId, departure_time, navigate });
+      setShowPopup(true);
+    } else {
+      localStorage.setItem("dep_time", departure_time);
+      localStorage.setItem("send_stop", true); // default if no popup
+      navigate(`/trip?tripId=${encodeURIComponent(tripId)}`);
+    }
   };
 
   return (
@@ -127,6 +160,32 @@ export const NextConnections = ({ selectedStop }) => {
             </button>
           </div>
         </div>
+
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <div className="popup-header">
+                <span
+                  onClick={() => handleDecision("nein")}
+                  className="close-button"
+                >
+                  ✕
+                </span>
+              </div>
+              <p style={{ marginBottom: "12px" }}>Bahnhof im Chat Speichern?</p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <button onClick={() => handleDecision("ja")}>Ja</button>
+                <button onClick={() => handleDecision("nein")}>Nein</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </div>

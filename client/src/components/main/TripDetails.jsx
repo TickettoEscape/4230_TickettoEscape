@@ -256,7 +256,7 @@ export const TripDetails = () => {
                     ✕
                   </span>
                 </div>
-                <p style={{ marginBottom: "12px" }}>Trip teilen?</p>
+                <p style={{ marginBottom: "12px" }}>Trip im Chat Speichern?</p>
                 <div
                   style={{
                     display: "flex",
