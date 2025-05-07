@@ -14,18 +14,12 @@ const useSendTrip = () => {
     localStorage.setItem("gamePath", location.pathname + location.search);
   }, [location.pathname, location.search]);
 
-  useEffect(() => {
-    if (localStorage.getItem("role") === "Polizei") {
-      setShowPopup(true);
-    }
-  }, []);
-
   const handleDecision = (decision) => {
     setSendTrip(decision === "ja");
     setShowPopup(false);
   };
 
-  return { sendTrip, showPopup, handleDecision };
+  return { sendTrip, showPopup, handleDecision, setShowPopup };
 };
 
 export const TripDetails = () => {
@@ -40,7 +34,14 @@ export const TripDetails = () => {
   const [searchParams] = useSearchParams();
   const tripId = searchParams.get("tripId");
 
-  const { sendTrip, showPopup, handleDecision } = useSendTrip();
+  const { sendTrip, showPopup, handleDecision, setShowPopup } = useSendTrip();
+
+  // Polizei role popup logic now inside TripDetails
+  useEffect(() => {
+    if (localStorage.getItem("role") === "Polizei" && selectedRoute === true) {
+      setShowPopup(true);
+    }
+  }, [selectedRoute, setShowPopup]);
 
   const RouteSpeichern = async (stop) => {
     const historyId = parseInt(localStorage.getItem("history_id"));
@@ -86,7 +87,7 @@ export const TripDetails = () => {
     const historyId = parseInt(localStorage.getItem("history_id"));
     const now = new Date();
     const timeOnly = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
-    const sendStop = true; // or false, depending on your logic
+    const sendStop = true;
 
     const payload = {
       history_id: historyId,
