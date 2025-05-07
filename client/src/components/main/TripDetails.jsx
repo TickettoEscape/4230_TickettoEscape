@@ -33,7 +33,8 @@ export const TripDetails = () => {
   const [headsign, setHeadsign] = useState("");
   const [loading, setLoading] = useState(true);
   const [stopTimes, setStopTimes] = useState([]);
-  const [selectedRoute, setSelectedRoute] = useState(true);
+  const [selectedRoute, setSelectedRoute] = useState(false);
+  const [selectedBahnhof, setSelectedBahnhof] = useState(true);
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -45,6 +46,8 @@ export const TripDetails = () => {
     const historyId = parseInt(localStorage.getItem("history_id"));
     const tripId = localStorage.getItem("selectedTripId");
     const departureTime = localStorage.getItem("dep_time");
+    setSelectedBahnhof(false);
+    setSelectedRoute(true);
 
     const payload = {
       trip_id: tripId,
@@ -71,7 +74,6 @@ export const TripDetails = () => {
 
       if (data.status === "success") {
         console.log("✅ Route successfully saved.");
-        setSelectedRoute(false);
       } else {
         console.error("❌ Error response:", data);
       }
@@ -235,8 +237,10 @@ export const TripDetails = () => {
               })}
             </div>
           )}
-          <button onClick={RouteSpeichern}>Route Speichern</button>
-          <button onClick={BahnhofAbmelden} disabled={selectedRoute}>
+          <button onClick={RouteSpeichern} disabled={selectedRoute}>
+            Route Speichern
+          </button>
+          <button onClick={BahnhofAbmelden} disabled={selectedBahnhof}>
             von Bahnhof abmelden
           </button>
 
