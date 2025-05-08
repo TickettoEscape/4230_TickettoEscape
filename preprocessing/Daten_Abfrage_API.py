@@ -226,6 +226,24 @@ def alter_history(data: GroupInputHistory):
 
 
 
+
+@app.get("/api/karte")
+def map():
+    try:
+        query = f"""
+        SELECT
+            stop_name AS Name, 
+            ST_Y(geometry) AS lat, 
+            ST_X(geometry) AS lon
+        FROM stops_parent;
+        """
+        
+        df = pd.read_sql_query(query, engine)
+        
+        return df.to_dict(orient='records')
+    except Exception as e:
+        return {"error": str(e)}
+
 @app.get("/api/chat")
 def chat(game_id: int = Query(...)):
     try:
