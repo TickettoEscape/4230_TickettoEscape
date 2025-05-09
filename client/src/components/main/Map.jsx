@@ -1,3 +1,5 @@
+import { Footer } from "../Footer";
+import { Header } from "../Header";
 import React from "react";
 import {
   MapContainer,
@@ -13,10 +15,12 @@ import "leaflet/dist/leaflet.css";
 export const Map = () => {
   return (
     <div style={{ height: "100vh" }}>
+      <Header />
+
       <MapContainer
-        center={[51.505, -0.09]}
-        zoom={13}
-        style={{ height: "100%", width: "100%" }}
+        center={[46.8084, 8.2275]}
+        zoom={7}
+        style={{ height: "100%", width: "100%", marginTop: "60px" }}
       >
         {/* Tile Layer */}
         <TileLayer
@@ -24,25 +28,25 @@ export const Map = () => {
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
 
-        {/* Marker with Popup */}
+        {/* Marker with Popup
         <Marker position={[51.505, -0.09]}>
           <Popup>
             Hello world!
             <br />
             This is a marker.
           </Popup>
-        </Marker>
+        </Marker> */}
 
-        {/* Circle around the marker */}
+        {/* Circle around the marker
         <Circle
           center={[51.505, -0.09]}
           radius={500}
           color="red"
           fillColor="#f03"
           fillOpacity={0.5}
-        />
+        /> */}
 
-        {/* Polygon */}
+        {/* Polygon
         <Polygon
           positions={[
             [51.509, -0.08],
@@ -52,8 +56,9 @@ export const Map = () => {
           ]}
         >
           <Popup>I am a polygon.</Popup>
-        </Polygon>
+        </Polygon> */}
       </MapContainer>
+      <Footer />
     </div>
   );
 };
