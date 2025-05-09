@@ -10,6 +10,7 @@ import random
 
 
 
+
 # Initialize app
 app = FastAPI()
 
@@ -223,7 +224,7 @@ def alter_history(data: GroupInputHistory):
         return {"error": str(e)}
 
 
-
+from fastapi.responses import JSONResponse
 
 
 
@@ -232,6 +233,7 @@ def map():
     try:
         query = f"""
         SELECT
+            stop_id AS id,
             stop_name AS Name, 
             ST_Y(geometry) AS lat, 
             ST_X(geometry) AS lon
@@ -239,8 +241,8 @@ def map():
         """
         
         df = pd.read_sql_query(query, engine)
-        
-        return df.to_dict(orient='records')
+        return JSONResponse(content=df.to_dict(orient='records'))
+    
     except Exception as e:
         return {"error": str(e)}
 

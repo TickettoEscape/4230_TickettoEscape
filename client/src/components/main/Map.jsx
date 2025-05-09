@@ -1,63 +1,52 @@
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Circle,
-  Polygon,
-} from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Don't need to use `useRef` or manually initialize the map.
+// Custom marker icon
+const customMarker = new L.Icon({
+  iconUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png",
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+});
+
 export const Map = () => {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/karte")
+      .then((res) => res.json())
+      .then((data) => setLocations(data))
+      .catch((err) => console.error("Failed to fetch locations:", err));
+  }, []);
+
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <Header />
-
-      <MapContainer
-        center={[46.8084, 8.2275]}
-        zoom={7}
-        style={{ height: "100%", width: "100%", marginTop: "60px" }}
-      >
-        {/* Tile Layer */}
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-        />
-
-        {/* Marker with Popup
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            Hello world!
-            <br />
-            This is a marker.
-          </Popup>
-        </Marker> */}
-
-        {/* Circle around the marker
-        <Circle
-          center={[51.505, -0.09]}
-          radius={500}
-          color="red"
-          fillColor="#f03"
-          fillOpacity={0.5}
-        /> */}
-
-        {/* Polygon
-        <Polygon
-          positions={[
-            [51.509, -0.08],
-            [51.503, -0.06],
-            [51.51, -0.047],
-            [51.51, -0.07],
-          ]}
+      <div style={{ flexGrow: 1 }}>
+        <MapContainer
+          center={[46.8084, 8.2275]} // center of Switzerland
+          zoom={7}
+          style={{ height: "100%", width: "100%" }}
         >
-          <Popup>I am a polygon.</Popup>
-        </Polygon> */}
-      </MapContainer>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+          />
+          {locations.map((location, index) => (
+            <Marker
+              key={index}
+              position={[location.lat, location.lon]}
+              icon={customMarker}
+            >
+              <Popup>{location.name}</Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
       <Footer />
     </div>
   );

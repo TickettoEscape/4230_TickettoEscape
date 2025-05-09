@@ -107,10 +107,10 @@ button:hover {
   background-color: white;
   flex-direction: column;
   padding: 20px;
-  max-width:300px;
-  min-width:300px;
+  max-width: 300px;
+  min-width: 300px;
   border-radius: 10px;
-  gap:12px;
+  gap: 12px;
   display: flex;
   position: relative; /* <<< wichtig für X oben rechts */
   box-sizing: border-box;
@@ -149,10 +149,10 @@ button:hover {
   text-align: center;
 }
 
-
 /* Inhalt der Accordion-Abschnitte */
 
-.form-box p, .form-box li {
+.form-box p,
+.form-box li {
   color: #b20000;
   font-size: 14px;
 }
@@ -280,7 +280,6 @@ button:hover {
   text-align: center;
 }
 
-
 /* ========================
    Waiting Room Styles
 ======================== */
@@ -372,7 +371,6 @@ button:hover {
   overflow: hidden;
 }
 
-
 .timeline-entry {
   display: grid;
   grid-template-columns: 45px 16px 1fr auto;
@@ -448,7 +446,7 @@ button:hover {
   align-items: center;
   font-size: 13px;
   justify-content: space-between;
-  box-shadow: 0 0 4px rgba(0,0,0,0.08);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   border-left: 4px solid transparent;
 }
 
