@@ -55,7 +55,7 @@ conda env create -f ENV_Ticket_to_Escape.yml
 conda activate Ticket_to_Escape
 ```
 
-2. Backend ausführen, virtuelle Umgebung starten und server *uvicorn* starten. Öffne http://localhost:8000/api/departures?stop_name=Muttenz im Browser und verifiziere, ob das Backend läuft.
+2. Backend ausführen, virtuelle Umgebung starten und server *uvicorn* starten. Öffne http://localhost:8000/docs  im Browser und verifiziere, ob das Backend läuft.
 ``` shell
 cd server
 # aktiviere die conda umgebung gdiproject
