@@ -9,10 +9,12 @@ title: Ticket to Escape
 
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
 
-<video controls width="640">
-  <source src="videos/Video_Ticket_to_escape.mp4" type="video/mp4">
-</video>
-
+<div style="text-align: center; margin: 20px 0;">
+  <video controls style="width: 100%; max-width: 640px; height: auto;">
+    <source src="{{ '/videos/Video_Ticket_to_escape.mp4' | relative_url }}" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+  </video>
+</div>
 
 Im Rahmen des Vertiefungsprofil 4230 Geoinformatik und Raumanalyse I wurde das im Unterricht erlernte Wissen in die Praxis umgesetzt. 
 
