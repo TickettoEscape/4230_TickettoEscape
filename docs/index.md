@@ -12,7 +12,7 @@ GitHub Repository: [https://github.com/TickettoEscape/4230_TickettoEscape](https
 #### Projektteam
 - [Manuel Aebi](https://github.com/AebiM)
 - [Vania Fernandes Pereira](https://github.com/VaniaPereira01)
-- [Scan Uythoven](https://github.com/SvenUythoven)
+- [Sven Uythoven](https://github.com/SvenUythoven)
 
 
 [↑](#top)
