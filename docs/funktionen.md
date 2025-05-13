@@ -5,6 +5,14 @@ Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt.
 ## Spiel erstellen 
 Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
 
+<div style="display: flex; gap: 10px;">
+  <img src="/Bilder/01_Startseite.png" alt="Bild 1" style="width: 48%;">
+  <img src="/Bilder/02_Neues_Spiel.png" alt="Bild 2" style="width: 48%;">
+</div>
+![Startseite](Bilder/01_Startseite.png)
+![Spielname wählen](Bilder/02_Spielname.png)
+
+
 Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **[Spiel-ID](#spiel-id)** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
 
 ## Spiel beitreten 
