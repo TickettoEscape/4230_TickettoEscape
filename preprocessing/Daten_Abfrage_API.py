@@ -229,15 +229,19 @@ from fastapi.responses import JSONResponse
 
 
 @app.get("/api/karte")
-def map():
+def map(game_id: int = Query(...), group_id: int = Query(...)):
     try:
         query = f"""
         SELECT
-            stop_id AS id,
-            stop_name AS Name, 
-            ST_Y(geometry) AS lat, 
-            ST_X(geometry) AS lon
-        FROM stops_parent;
+            h.history_id,
+            sp.stop_id AS id,
+            sp.stop_name AS Name, 
+            ST_Y(sp.geometry) AS lat,
+            ST_X(sp.geometry) AS lon
+        FROM history h
+        JOIN stops_parent sp ON sp.stop_name = h.from_stop
+        WHERE h.game_id = '{game_id}' AND h.group_id = '{group_id}'
+        ORDER BY h.login_time DESC;
         """
         
         df = pd.read_sql_query(query, engine)
