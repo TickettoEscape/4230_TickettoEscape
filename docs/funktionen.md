@@ -13,7 +13,7 @@ Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und defini
 Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **Spiel-ID** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
 
 
-<p style="display: flex; gap: 10px;">
+<p style="display: flex; justify-content:center; gap: 10px;">
   <img src="Bilder/03_Rolle_Auswahl.png" alt="Rolle auswählen" style="width: 30%;">
   <img src="Bilder/04_Gruppen_Name.png" alt="Gruppenname" style="width: 30%;">
     <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
@@ -23,7 +23,7 @@ Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname a
 Wurde das Spiel bereits erstellt, kann man mit der
 **Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
 
-<p style="display: flex; gap: 10px;">
+<p style="display: flex; justify-content:center; gap: 10px;">
   <img src="Bilder/21_Speil_beitreten.png" alt="Speil beitreten" style="width: 30%;">
   <img src="Bilder/22_Auswahl_Bahnhof.png" alt="Auswahl_Gruppe" style="width: 30%;">
     <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
@@ -32,7 +32,7 @@ Wurde das Spiel bereits erstellt, kann man mit der
 ## Bahnhof und Verbindungen suchen 
 Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
 
-<p style="display: flex; gap: 10px;">
+<p style="display: flex; justify-content:center; gap: 10px;">
   <img src="Bilder/11_Startbahnhof.png" alt="Bahnhof wählen" style="width: 32%;">
   <img src="Bilder/12_Verbindungen.png" alt="Verbindungen" style="width: 32%;">
     <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
@@ -45,14 +45,14 @@ Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mi
   <img src="Bilder/25_Bahnhof_im_Chat_Senden.png" alt="Bahnhof im Chat senden" style="width: 32%;">
 </p>
 
-Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](#Chat) gesendet werden soll.
+Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](##Chat) gesendet werden soll.
 
 <p style="display: flex; justify-content:center;gap: 10px;">
   <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
 </p>
 
 ## Informationen teilen Räuber
-Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](#Chat) schicken. 
+Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
 
 <p style="display: flex; justify-content:center;gap: 10px;">
   <img src="Bilder/14_Von_Bahnhof_abmelden.png" alt="Bahnhof wählen" style="width: 32%;">
@@ -72,6 +72,12 @@ Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisc
 </p>
 
 ## Karte
+Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. 
+
+<p style="display: flex; justify-content:center;gap: 10px;">
+  <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
+</p>
+
 
 ## Informationen
 Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
