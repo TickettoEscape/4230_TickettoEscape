@@ -14,18 +14,24 @@ Ein Spiel besteht aus einer Räubergruppe und 2-10 Polizistengruppen. Dabei ist 
 
 Die Räuber beginnen mit 30 Minuten Vorsprung an einem frei wählbaren Bahnhof. Dieser wird den Polistengruppen bei Spielbeginn mitgeteilt. 
 
+## Spielablauf
+
+Die Räuber melden sich immer, wenn sie an einem Bahnhof aus dem Zug aussteigen *09:27 abgemeldet am Bahnhof Aarau* und immer wenn sie vom Bahnhof abfahren *09:42 abgemeldet am Bahhof Aarau*
+
+Die Räuber müssen sich direkt am Bahnhof anmelden wenn sie aus dem Zug aussteigen. Innerhalb der nächsten 15 Minuten müssen sie den Bahnhof wieder verlassen. Aus taktischen Gründen kann es jedoch sinnvoll sein, länger am Bahnhof angemeldet zu bleiben obwohl dieser bereits verlassen wurde.
+
+Die Polizisten müssen jede zweite Verbindung melden *9:32 S26 Richtung Lenzburg* zusätzlich können sie damit die Räuber am Bahhof gefangen werden können den Bahhof melden *10:45 angemeldet am Bahnhof Aarau*, dies ist optional.
+
+## Zusätzliche Reglen 
+- Die Räuber dürfen sich maximale 1 Stunde im gleichen Zug aufhalten. Fahren sie länger kommt es zu einem Regelverstoss und die Polizisten gewinnen. 
+- An einem Bahnhof aussteigen und in den gleichen ZUg weiterfahren, ohne dass er die Richtung wechselt, ist nicht erlaubt. 
+- Mit einem Zug der an einem Endbahhof hält und die Linie wechselt kann weitergefahren werden, die Verbindung muss in der App gemeldet werden. 
 
 ## Spielende 
 
 Das Spiel endent bei Ablauf der definierten Spielzeit, wenn die Räuber gefangen werden oder es zu einem Regelbruch kommt.
-- Räuber werden gefangen, wenn sie gleichzeitig wir die Polizisten an einem Bahnhof sind. 
-- Sind die Gruppen gleichzeit in einem Zug und begegnen sie sich, so haben die Polizisten ebenAWEfalls gewonnen. 
-
-## Spielablauf
-
-Die Räuber melden sich immer, wenn: 
-1. Sie an einem Bahnhof aus dem Zug aussteigen 
-
+- Räuber werden gefangen, wenn sie gleichzeitig wie die Polizisten an einem Bahnhof sind. 
+- Sind die Gruppen gleichzeit in einem Zug und begegnen sie sich, so haben die Polizisten ebenfalls gewonnen. 
 
 
 [↑](#top)

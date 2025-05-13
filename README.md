@@ -2,11 +2,11 @@
 Server Client Projekt für eine Geodateninfrastruktur Webportal im Rahmen des Moduls 4230
 
 - **Frontend:** React.js, OpenLayers und MUI
-- **Backend:** FastAPI, GeoServer
+- **Backend:** FastAPI, Unicron
 
-GitHub Pages: https://314a.github.io/GDI_Project/
+GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 
-Getestet mit Node version 22.14.0, openlayers 9.1.0, mapliber 5.1.0, react 18.3.1
+
 
 ## Requirements
 
@@ -16,7 +16,7 @@ Getestet mit Node version 22.14.0, openlayers 9.1.0, mapliber 5.1.0, react 18.3.
 - Node.js und npm ([https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)) 
 
 ## Repository lokal klonen
-Mit Git in einem Terminal das GitHub Repository *Geoharvester* in ein lokales Verzeichnis klonen.
+Mit Git in einem Terminal das GitHub Repository *Ticket to Escape* in ein lokales Verzeichnis klonen.
 
 ``` shell
 cd /path/to/workspace
@@ -43,25 +43,25 @@ npm run dev
 ```
 
 ## Backend installieren
-Öffne ein Terminal und wechsle in den *server* Ordner.
-1. Virtuelle Umgebung für Python mit allen Requirements in der `requirements.txt` Datei aufsetzen.
+Öffne ein Terminal und wechsle in den *preprocessing* Ordner.
+1. Virtuelle Umgebung für Python mit allen Requirements mit der `ENV_Ticket_to_Escape.yml` automatisch oder mit  `requirements.txt` manuell aufsetzen.
 
 ```shell
-# Requirements
-cd server
+# go to YML-File
+cd preprocessing
 # Füge conda-forge den als Channel in conda hinzu, da sonst nicht alle Pakete installiert werden können.
-conda config --add channels conda-forge
-# Erstelle ein neues Conda Environment und füge die Python Packges requirements.txt hinzu, requirements.txt befindet sich im Ordner server/app
-conda create --name gdiproject python=3.10.9 --file app/requirements.txt
+conda env create -f ENV_Ticket_to_Escape.yml
+# Env aktivieren.
+conda activate Ticket_to_Escape
 ```
 
-2. Backend ausführen, virtuelle Umgebung starten und server *uvicorn* starten. Öffne http://localhost:8000/docs im Browser und verifiziere, ob das Backend läuft.
+2. Backend ausführen, virtuelle Umgebung starten und server *uvicorn* starten. Öffne http://localhost:8000/docs  im Browser und verifiziere, ob das Backend läuft.
 ``` shell
 cd server
 # aktiviere die conda umgebung gdiproject
 conda activate gdiproject
 # start server auf localhost aus dem Ordner "server"
-uvicorn app.main:app --reload
+uvicorn Daten_Abfrage_API:app --reload
 # Öffne die angegebene URL im Browser und verifiziere, ob das Backend läuft.
 ```
 
