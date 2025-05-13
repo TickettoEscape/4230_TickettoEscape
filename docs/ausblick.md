@@ -8,7 +8,10 @@ Einige Überlegungen, wie das Spiel nutzerfreundlicher und interessanter gestalt
 
 ## Implementation Bestrafung bei Regelbruch
 
-Der Zeitliche Aspekt im Ticket to Escape könnte zu einigen interessanten Spieltaktiken führen. Bei nicht einhalten der Zeitlimiten in einem Zug oder an einem Bahnhof könnte in eine Meldung im Chat oder auf der Karte mit Livestandort ans Gegenerteam gestraft werden.Diverse Karten Funktionen
+Der Zeitliche Aspekt im Ticket to Escape könnte zu einigen interessanten Spieltaktiken führen. Bei nicht einhalten der Zeitlimiten in einem Zug oder an einem Bahnhof könnte in eine Meldung im Chat oder auf der Karte mit Livestandort ans Gegenerteam gestraft werden.
+
+## Diverse Karten Funktionen
+
 Die Geometrien der einzelnen Zugstrecken könnten von OSM abgerufen und in die Datenbank ergänzt werden. Dies ermöglicht die Anzeige der Historie in der Karte und eine nachträgliche Spielauswertung, bei der der Verlauf der einzelnen Gruppen betrachtet werden kann.
 Zudem könnte in der Karte noch eine Suchfunktion eingeführt werden, welche zeigt, wo sich ein Bahnhof oder ein im Chat erwähnter Trip genau befindet, da die User vermutlich nicht jeden Bahnhof und jede Zugverbindung in der Schweiz kennen.
 
