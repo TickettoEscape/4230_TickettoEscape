@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="Bilder/logo_zugeschnitten.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ '/Bilder/logo_zugeschnitten.png' | relative_url }}" type="image/x-icon">
     {% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <!--[if lt IE 9]>
@@ -22,7 +22,7 @@
       .header-content h2 {
           margin-left: 10px;
       }
-  </style>
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -44,10 +44,10 @@
         <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
     </ul>
     {% endif %}
-    <div class="header-content" style="display: flex; align-items: center;">
-      <img src="Bilder/logo.png" alt="Logo" style="height:50px;">
+    <div class="header-content">
+      <img src="{{ '/Bilder/logo.png' | relative_url }}" alt="Logo" style="height:50px;">
       <h2 style="margin-left: 10px;">Dokumentation Ticket to Escape</h2>
-  </div>
+    </div>
     <nav>
       <ul>
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/index.html">TickettoEscape</a></li>
@@ -82,17 +82,29 @@
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/ausblick.html">Erweiterungsmöglichkeiten</a></li>
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/quellenverzeichnis.html">Quellenverzeichnis</a></li>
       </ul>
-  </nav>
-  <div>
-    {% if site.github.is_project_page %}
-    <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></small></p>
-    {% endif %}
-    <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-  </div>
-</header>
-<section>
-    {{ content }}
-</section>
+    </nav>
+    <div>
+      {% if site.github.is_project_page %}
+      <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></small></p>
+      {% endif %}
+      <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+      <!-- Projektteam direkt darunter, schlicht -->
+      <div style="margin-top: 10px;">
+        <h4 style="margin-bottom: 5px;">Projektteam</h4>
+        <ul style="margin-top: 0;">
+          <li><a href="https://github.com/AebiM">Manuel Aebi</a></li>
+          <li><a href="https://github.com/VaniaPereira01">Vania Fernandes Pereira</a></li>
+          <li><a href="https://github.com/SvenUythoven">Sven Uythoven</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section>
+      {{ content }}
+  </section>
+
 </div>
 <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 </body>
