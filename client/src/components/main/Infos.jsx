@@ -49,6 +49,12 @@ export const Infos = () => {
       content:
         "09:27 Anmeldung Bahnhof Aarau\n10:00 Standortmeldung S23\n10:15 Anmeldung Bahnhof Langenthal",
     },
+        {
+      key: "impressum",
+      title: "Impressum",
+      content:
+        "Entwickler: Aebi Manuel, Fernandes Pereira Vania, Uythoven Sven \nDie Entwickler übernehmen keine Verantwortung für die Aktualität, Korrektheit oder Vollständigkeit der Inhalte der Web App. Es wird keine Gewähr für den Betrieb der Web App übernommen; eine Haftung für Schäden an Hard- oder Software infolge von Viren oder technischen Problemen jeglicher Art ist ausgeschlossen. ",
+    },
   ];
 
   return (
