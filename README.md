@@ -67,3 +67,10 @@ uvicorn Daten_Abfrage_API:app --reload
 
 ## API Dokumentation
 Fast API kommt mit vorinstallierter Swagger UI. Wenn der Fast API Backen Server läuft, kann auf die Dokumentation der API über Swagger UI auf http://localhost:8000/docs verfügbar.
+
+
+## DB erstellen
+Die Daten für die DB sind im preprocessing Ordner im File `Ticket_to_Escape_DB.sql`
+
+Diese Zeile (27) muss im File `Daten_Abfrage_API.py` angepasst werden:
+db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
