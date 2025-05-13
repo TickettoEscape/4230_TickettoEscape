@@ -6,9 +6,8 @@ Eine vollständige Geodateninfrastruktur (GDI) umfasst das Backend, das Frontend
 
 ## Backend
 
-Das Backend
-
-Das Backend beinhaltet alle unsichtbaren Inhalte und Daten, die sich auf dem Server Dazu gehören folgenden Punkte:
+Das Backend beinhaltet alle unsichtbaren Inhalte und Daten, die sich auf dem Server. 
+Dazu gehören folgenden Punkte:
 
 - Ein Räumliches Datenbanksystem (RDBS) bestehend aus einer PostgreSQL Datenbank mit PostGIS erweiterung.
 - API-Schnittstelle
