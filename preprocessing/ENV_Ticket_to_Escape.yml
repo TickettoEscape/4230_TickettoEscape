@@ -1,4 +1,4 @@
-name: Proj_SBB
+name: Ticket_to_Escape
 channels:
   - conda-forge
   - defaults
