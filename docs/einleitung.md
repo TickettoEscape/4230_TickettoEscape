@@ -38,9 +38,6 @@ Das Spiel endent bei Ablauf der definierten Spielzeit, wenn die Räuber gefangen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← TickettoEscape</a>
-  </div>
-  <div>
     <a href="funktionen.html">Erklärung der Funktionen →</a>
   </div>
 </div>

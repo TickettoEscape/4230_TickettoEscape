@@ -91,7 +91,7 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="einleitung.html">← Einleitung</a>
+    <a href="einleitung.html">← Ticket to Escape</a>
   </div>
   <div>
     <a href="aufbauGDI.html">Aufbau GDI →</a>
