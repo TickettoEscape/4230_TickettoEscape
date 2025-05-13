@@ -59,7 +59,7 @@ conda activate Ticket_to_Escape
 ``` shell
 cd server
 # aktiviere die conda umgebung gdiproject
-conda activate gdiproject
+conda activate Ticket_to_Escape
 # start server auf localhost aus dem Ordner "server"
 uvicorn Daten_Abfrage_API:app --reload
 # Öffne die angegebene URL im Browser und verifiziere, ob das Backend läuft.
