@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 import { Footer } from "../Footer";
+import { Header } from "../Header";
 
 export const Infos = () => {
   const [popupContent, setPopupContent] = useState(null);
@@ -52,7 +53,8 @@ export const Infos = () => {
 
   return (
     <div className="page">
-      <Footer/>
+      <Header />
+      
       <div className="card">
         <div className="form-box">
 
@@ -69,6 +71,7 @@ export const Infos = () => {
             </div>
           ))}
         </div>
+        <Footer/>
       </div>
 
       {/* Popup */}
