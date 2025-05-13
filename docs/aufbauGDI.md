@@ -28,6 +28,6 @@ Die API werden für den Datentrasnfer zwischen Front-/ Backend verwendet. Erfass
     <a href="funktionen.html">← Erklärung der Funktionen</a>
   </div>
   <div>
-    <a href="konzept.html">Konzept und Ideen →</a>
+    <a href="ausblick.html">Erweiterungsmöglichkeiten →</a>
   </div>
 </div>

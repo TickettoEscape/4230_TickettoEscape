@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-# Einleitung
+# Ticket to Escape
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
 
 Im Rahmen des Vertiefungsprofil 4230 Geoinformatik und Raumanalyse I wurde das im Unterricht erlernte Wissen in die Praxis umgesetzt. 
@@ -37,9 +37,6 @@ Das Spiel endent bei Ablauf der definierten Spielzeit, wenn die Räuber gefangen
 
 
 <div style="display: flex; justify-content: space-between;">
-  <div>
-    <a href="index.html">← TickettoEscape</a>
-  </div>
   <div>
     <a href="funktionen.html">Erklärung der Funktionen →</a>
   </div>

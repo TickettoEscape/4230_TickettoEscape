@@ -34,7 +34,7 @@ Es gibt eine Version des Spiels, welche im 30-Minuten-Takt einen Live-Standort v
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="funktionen.html">← Konzept und Ideen</a>
+    <a href="aufbauGDI.html">← Aufbau GDI</a>
   </div>
   <div>
    <a href="quellenverzeichnis.html">Quellenverzeichnis →</a>
