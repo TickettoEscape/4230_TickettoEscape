@@ -72,7 +72,7 @@ Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisc
 </p>
 
 ## Karte
-Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. 
+Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
 
 <p style="display: flex; justify-content:center;gap: 10px;">
   <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
