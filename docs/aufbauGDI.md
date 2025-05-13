@@ -1,10 +1,24 @@
 # Aufbau Geodateninfrastruktur (GDI)
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt.
+Eine vollständige Geodateninfrastruktur (GDI) umfasst das Backend, das Frontend sowie die verwendeten Bibliotheken und API-Schnittstellen. Das folgende Schema zeigt die entwickelte und genutzte GDI der Ticket to Escape Webapplikation.
 
-## Spiel erstellen
+![GDI Projekt Screenshot](Bilder/Datenbankschema.png)
 
-Der erste Spieler erstellt mit dem Button **_Neues Spiel_** ein Spiel und definiert die _Maximale Spieldauer (Stunden)_ und die _Anzahl Polizisten_. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten.
+## Backend
+
+Das Backend
+
+Das Backend beinhaltet alle unsichtbaren Inhalte und Daten, die sich auf dem Server Dazu gehören folgenden Punkte:
+
+- Ein Räumliches Datenbanksystem (RDBS) bestehend aus einer PostgreSQL Datenbank mit PostGIS erweiterung.
+- API-Schnittstelle
+- Node-Server als Schnittstelle zwischen dem RDBS und dem Frontend
+
+Die Datenbank ist mit dem GTFS Datensatz der SBB abgefüllt. Die GTFS Daten müssen bei Fahrplanwechsel neu erfasst werden! Die Tabellen welche fürs Spiel verwendet werden sind per default leer.
+
+## API
+
+Die API werden für den Datentrasnfer zwischen Front-/ Backend verwendet. Erfasste/ gewählte Daten werden aus dem Frontend als Payload ins Backend geschickt. Hier werden je nach Endpoint die Daten weiterverarbeitet und in die Datenbank gespielt. Das gleiche geschieht mit Abfragen an die DB.
 
 <a id="top"></a>
 
