@@ -4,7 +4,7 @@ Server Client Projekt für eine Geodateninfrastruktur Webportal im Rahmen des Mo
 - **Frontend:** React.js, OpenLayers und MUI
 - **Backend:** FastAPI, Unicron
 
-GitHub Pages: https://314a.github.io/GDI_Project/
+GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 
 
 
