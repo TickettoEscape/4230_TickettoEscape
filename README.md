@@ -47,12 +47,12 @@ npm run dev
 1. Virtuelle Umgebung für Python mit allen Requirements in der `requirements.txt` Datei aufsetzen.
 
 ```shell
-# Requirements
-cd server
+# go to YML-File
+cd preprocessing
 # Füge conda-forge den als Channel in conda hinzu, da sonst nicht alle Pakete installiert werden können.
-conda config --add channels conda-forge
-# Erstelle ein neues Conda Environment und füge die Python Packges requirements.txt hinzu, requirements.txt befindet sich im Ordner server/app
-conda create --name gdiproject python=3.10.9 --file app/requirements.txt
+conda env create -f ENV_Ticekt_to_Escape.yml
+# Env aktivieren.
+conda activate Ticket_to_Escape
 ```
 
 2. Backend ausführen, virtuelle Umgebung starten und server *uvicorn* starten. Öffne http://localhost:8000/docs im Browser und verifiziere, ob das Backend läuft.
