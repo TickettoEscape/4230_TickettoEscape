@@ -6,7 +6,13 @@ title: Ticket to Escape
 <a id="top"></a>
 
 # Ticket to Escape
+
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
+
+<video controls width="640">
+  <source src="videos/Video_Ticket_to_escape.mp4" type="video/mp4">
+</video>
+
 
 Im Rahmen des Vertiefungsprofil 4230 Geoinformatik und Raumanalyse I wurde das im Unterricht erlernte Wissen in die Praxis umgesetzt. 
 
