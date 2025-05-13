@@ -33,7 +33,6 @@ Das Spiel endent bei Ablauf der definierten Spielzeit, wenn die Räuber gefangen
 - Räuber werden gefangen, wenn sie gleichzeitig wie die Polizisten an einem Bahnhof sind. 
 - Sind die Gruppen gleichzeit in einem Zug und begegnen sie sich, so haben die Polizisten ebenfalls gewonnen. 
 
-
 [↑](#top)
 
 
