@@ -29,7 +29,7 @@ export const Rules = () => {
       key: "ablauf",
       title: "🔄 Spielablauf",
       content:
-        "• Räuber melden beim Aussteigen den Bahnhof\n• Alle 30 Minuten: Standort & Linienbezeichnung\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
+        "• Räuber melden beim Aussteigen den Bahnhof\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
     },
     {
       key: "ende",
@@ -41,7 +41,7 @@ export const Rules = () => {
       key: "regeln",
       title: "⚠️ Zusätzliche Regeln",
       content:
-        "• Maximal 1.25h im Zug\n• Kein Wiedereinsteigen ohne Richtungswechsel\n• Maximal 1h mit Endbahnhof-Zügen",
+        "• Maximal 1h im Zug\n• Kein Wiedereinsteigen ohne Richtungswechsel\n• Maximal 1h mit Endbahnhof-Zügen",
     },
     {
       key: "beispiel",

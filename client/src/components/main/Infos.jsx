@@ -29,7 +29,7 @@ export const Infos = () => {
       key: "ablauf",
       title: "🔄 Spielablauf",
       content:
-        "• Räuber melden beim Aussteigen den Bahnhof\n• Alle 30 Minuten: Standort & Linienbezeichnung\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
+        "• Räuber melden beim Aussteigen den Bahnhof\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
     },
     {
       key: "ende",
