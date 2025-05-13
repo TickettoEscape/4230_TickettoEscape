@@ -2,7 +2,7 @@
 
 # Ticket to Escape
 
-Willkommen auf der GitHub-Page der Geodateninfarastruktur Ticket to Escape. Auf dieser Seite finden sie alle Informationen zu der Umsetzung der WebApp.
+Auf dieser Projektseite finden sie alle Informatioen zu der WebApplikation Ticket to Escape.
 
 GitHub Repository: [https://github.com/TickettoEscape/4230_TickettoEscape](https://github.com/TickettoEscape/4230_TickettoEscape)
 
