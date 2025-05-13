@@ -18,6 +18,7 @@
       }
       .header-content img {
           height: 50px;
+          
       }
       .header-content h2 {
           margin-left: 10px;
@@ -44,10 +45,10 @@
         <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
     </ul>
     {% endif %}
-    <div class="header-content">
-      <img src="{{ '/Bilder/Logo.png' | relative_url }}" alt="Logo" style="height:50px;">
-      <h2 style="margin-left: 10px;">Ticket to Escape</h2>
-    </div>
+    <div class="header-content" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+      <img src="{{ '/Bilder/Logo.png' | relative_url }}" alt="Logo" style="height: 50px;">
+      <h2 style="margin: 0;">Ticket to Escape</h2>
+    </div>    
     <nav>
       <ul>
         <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/">TickettoEscape</a></li>
