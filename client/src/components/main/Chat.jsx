@@ -52,7 +52,7 @@ export const Chat = () => {
       });
 
       return (
-        <div className="page top-align" style={{ paddingBottom: "50px" }}>
+        <div className="page top-align" >
           <Header />
           <div className="card" style={{ width: "100%", maxWidth: "420px", marginBottom: "16px" }}>
             <div className="form-box" style={{
