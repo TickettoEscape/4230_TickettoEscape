@@ -486,3 +486,24 @@ button:hover {
   max-height: 400px;
   overflow-y: auto;
 }
+.map-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #011432;
+}
+
+.map-fill {
+  flex: 1;
+  display: flex;
+}
+
+.map-container {
+  flex: 1;
+  height: 100% !important; /* force Leaflet to respect height */
+  width: 100%;
+}
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
