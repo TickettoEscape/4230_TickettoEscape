@@ -2,7 +2,7 @@
 Server Client Projekt für eine Geodateninfrastruktur Webportal im Rahmen des Moduls 4230
 
 - **Frontend:** React.js, OpenLayers und MUI
-- **Backend:** FastAPI, Unicron
+- **Backend:** FastAPI
 
 GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 
@@ -13,7 +13,8 @@ GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 - [Git](https://git-scm.com/)
 - IDE wie [Visual Studio Code](https://code.visualstudio.com/) 
 - [Anaconda Distribution](https://www.anaconda.com/products/distribution) oder [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-- Node.js und npm ([https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)) 
+- Node.js und npm ([https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm))
+- [PG Admin4](https://www.pgadmin.org/download/)
 
 ## Repository lokal klonen
 Mit Git in einem Terminal das GitHub Repository *Ticket to Escape* in ein lokales Verzeichnis klonen.
@@ -71,6 +72,7 @@ Fast API kommt mit vorinstallierter Swagger UI. Wenn der Fast API Backen Server 
 
 ## DB erstellen
 Die Daten für die DB sind im preprocessing Ordner im File `Ticket_to_Escape_DB.sql`
-
+``` shell
 Diese Zeile (27) muss im File `Daten_Abfrage_API.py` angepasst werden:
 db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
+```
