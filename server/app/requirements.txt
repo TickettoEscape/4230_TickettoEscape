@@ -4,4 +4,4 @@ pandas
 uvicorn
 orjson
 psycopg2
-pydantic
+sqlAlchemy
