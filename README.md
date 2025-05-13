@@ -21,7 +21,7 @@ Mit Git in einem Terminal das GitHub Repository *Ticket to Escape* in ein lokale
 ``` shell
 cd /path/to/workspace
 # Clone Repository 
-git clone https://github.com/314a/GDI_Project.git
+git clone https://github.com/TickettoEscape/4230_TickettoEscape.git
 ```
 
 ### Git Projekt mit Visual Studio Code lokal klonen
