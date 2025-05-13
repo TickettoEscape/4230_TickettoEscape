@@ -49,6 +49,7 @@ export const WaitingRoom = () => {
         </div>
         <div className="form-box">
           <h3>Warte auf die anderen Gruppen.</h3>
+          <h4 style={{ textAlign: "center" }}>Deine Spiel ID ist {gameId}</h4>
           <table className="waiting-table">
             <thead>
               <tr>
