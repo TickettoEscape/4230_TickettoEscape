@@ -2,7 +2,8 @@
 
 Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
 
-## Spiel erstellen 
+<a id="spielerstellen"></a>
+## Spiel erstellen
 Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
 
 <p style="display: flex; justify-content:center; gap: 10px;">
@@ -19,7 +20,8 @@ Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname a
     <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
 </p>
 
-## Spiel beitreten 
+<a id="spielbeitreten"></a>
+## Spiel beitreten
 Wurde das Spiel bereits erstellt, kann man mit der
 **Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
 
@@ -29,7 +31,8 @@ Wurde das Spiel bereits erstellt, kann man mit der
     <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
 </p>
 
-## Bahnhof und Verbindungen suchen 
+<a id="bahnhofverbindungen"></a>
+## Bahnhof und Verbindungen suchen
 Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
 
 <p style="display: flex; justify-content:center; gap: 10px;">
@@ -38,7 +41,8 @@ Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, 
     <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
 </p>
 
-## Informationen teilen Polizisten 
+<a id="informationenpolizisten"></a>
+## Informationen teilen Polizisten
 Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mit dem anderen Gruppen teilen. Dabei kann entscheiden werden ob sie den Bahnhof mit den anderen Gruppen teilen. Beim Auswählen des Bahnhof erscheint ein Pop-up mit der Meldung ***Bahnhof im Chat speichern?***
 
 <p style="display: flex; flex; justify-content:center;gap: 10px;">
@@ -51,6 +55,7 @@ Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up
   <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
 </p>
 
+<a id="informationenraeuber"></a>
 ## Informationen teilen Räuber
 Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
 
@@ -64,6 +69,7 @@ Nachdem die Verbindung erfasst wurde und die Räubergruppe sich am Bahnhof abgem
   <img src="Bilder/15_Nächste_Verbindung.png" alt="Bahnhof wählen" style="width: 32%;">
 </p>
 
+<a id="chat"></a>
 ## Chat
 Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisch. Zudem sind die Informationen der Gruppen farblich unterteilt.
 
@@ -71,6 +77,7 @@ Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisc
   <img src="Bilder/24_Chat.png" alt="Bahnhof wählen" style="width: 32%;">
 </p>
 
+<a id="karte"></a>
 ## Karte
 Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
 
@@ -78,7 +85,7 @@ Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim 
   <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
 </p>
 
-
+<a id="informationen"></a>
 ## Informationen
 Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
 
