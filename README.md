@@ -26,7 +26,7 @@ git clone https://github.com/TickettoEscape/4230_TickettoEscape.git
 
 ### Git Projekt mit Visual Studio Code lokal klonen
 Öffne ein neues Visual Studio Code Fenster und wähle unter Start *Clone Git Repository*. Alternativ öffne die Command Palette in VS Code `CTRL+Shift+P` (*View / Command Palette*) und wähle `Git: clone`. 
-Füge die Git web URL `https://github.com/314a/GDI_Project.git` ein und bestätige die Eingabe mit Enter. Wähle einen Ordner in welchen das Repository *geklont* werden soll.
+Füge die Git web URL `https://github.com/TickettoEscape/4230_TickettoEscape.git` ein und bestätige die Eingabe mit Enter. Wähle einen Ordner in welchen das Repository *geklont* werden soll.
 
 ## Frontend installieren
 Öffne ein Terminal (Command Prompt in VS Code) und wechsle in den *client* Ordner in diesem Projekt
