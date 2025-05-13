@@ -16,7 +16,7 @@ GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 - Node.js und npm ([https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)) 
 
 ## Repository lokal klonen
-Mit Git in einem Terminal das GitHub Repository *Geoharvester* in ein lokales Verzeichnis klonen.
+Mit Git in einem Terminal das GitHub Repository *Ticket to Escape* in ein lokales Verzeichnis klonen.
 
 ``` shell
 cd /path/to/workspace
@@ -43,8 +43,8 @@ npm run dev
 ```
 
 ## Backend installieren
-Öffne ein Terminal und wechsle in den *server* Ordner.
-1. Virtuelle Umgebung für Python mit allen Requirements in der `requirements.txt` Datei aufsetzen.
+Öffne ein Terminal und wechsle in den *preprocessing* Ordner.
+1. Virtuelle Umgebung für Python mit allen Requirements mit der `Ticekt_to_escape.yml` automatisch oder mit  `requirements.txt` manuell aufsetzen.
 
 ```shell
 # go to YML-File
