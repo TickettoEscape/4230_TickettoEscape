@@ -18,12 +18,12 @@ title: Ticket to Escape
 
 ![Video Ticket to Escape](Videos/Video_Ticket_to_escape.mp4) -->
 
-<div style="text-align: center; margin: 20px 0;">
+<!-- <div style="text-align: center; margin: 20px 0;">
   <video controls style="width: 100%; max-width: 640px; height: auto;">
     <source src="{{ '/Videos/Video_Ticket_to_escape.mp4' | relative_url }}" type="video/mp4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
-</div>
+</div> -->
 
 
 Im Rahmen des Vertiefungsprofil 4230 Geoinformatik und Raumanalyse I wurde das im Unterricht erlernte Wissen in die Praxis umgesetzt. 
