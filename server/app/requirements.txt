@@ -1,7 +1,7 @@
-fastapi
-geopandas
+numpy
 pandas
+scipy
+geopandas
+sqlalchemy
+fastapi
 uvicorn
-orjson
-psycopg2
-sqlAlchemy

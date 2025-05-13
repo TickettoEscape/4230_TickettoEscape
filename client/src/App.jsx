@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import { StartScreen } from "./components/start/StartScreen";
-import { JoinGame } from "./components/start/JoinGame";
+import { JoinGame } from "./components/start/JoinGame_DB";
 import { CreateGame } from "./components/start/CreateGame_DB";
 import { ChooseRole } from "./components/start/ChooseRole_DB";
 import { Rules } from "./components/start/Rules";
