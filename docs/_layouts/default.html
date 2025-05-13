@@ -22,7 +22,7 @@
       .header-content h2 {
           margin-left: 10px;
       }
-    </style>
+  </style>
 </head>
 <body>
 <div class="wrapper">
@@ -44,10 +44,10 @@
         <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
     </ul>
     {% endif %}
-    <div class="header-content">
+    <div class="header-content" style="display: flex; align-items: center;">
       <img src="Bilder/logo.png" alt="Logo" style="height:50px;">
       <h2 style="margin-left: 10px;">Dokumentation Ticket to Escape</h2>
-    </div>
+  </div>
     <nav>
       <ul>
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/index.html">TickettoEscape</a></li>
@@ -82,30 +82,18 @@
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/ausblick.html">Erweiterungsmöglichkeiten</a></li>
           <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/quellenverzeichnis.html">Quellenverzeichnis</a></li>
       </ul>
-    </nav>
-    <div>
-      {% if site.github.is_project_page %}
-      <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></small></p>
-      {% endif %}
-      <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-    </div>
-  </header>
-
-  <section>
-      {{ content }}
-  </section>
-
-  <!-- Projektteam-Sektion -->
-  <footer style="margin-top: 40px; padding: 20px; background-color: #f2f2f2;">
-    <h4>Projektteam</h4>
-    <ul>
-      <li><a href="https://github.com/AebiM">Manuel Aebi</a></li>
-      <li><a href="https://github.com/VaniaPereira01">Vania Fernandes Pereira</a></li>
-      <li><a href="https://github.com/SvenUythoven">Sven Uythoven</a></li>
-    </ul>
-  </footer>
+  </nav>
+  <div>
+    {% if site.github.is_project_page %}
+    <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></small></p>
+    {% endif %}
+    <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+  </div>
+</header>
+<section>
+    {{ content }}
+</section>
 </div>
-
 <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 </body>
 </html>
