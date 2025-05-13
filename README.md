@@ -73,6 +73,12 @@ Fast API kommt mit vorinstallierter Swagger UI. Wenn der Fast API Backen Server 
 ## DB erstellen
 Die Daten für die DB sind im preprocessing Ordner im File `Ticket_to_Escape_DB.sql`
 ``` shell
-Diese Zeile (27) muss im File `Daten_Abfrage_API.py` angepasst werden:
-db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
+im PG Admin neue DB erstellen, Name, User, und Passwort Merken!!
+mit rechtklick auf DB über "restore" diese Datei wählen `Ticket_to_Escape_DB.sql`. 
+
+Name, USER & Passwort in Zeile 27 im File `Daten_Abfrage_API.py` angepassen:
+Zeile 27: db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
+
+
+
 ```
