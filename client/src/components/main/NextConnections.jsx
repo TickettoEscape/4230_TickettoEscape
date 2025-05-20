@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
-export const NextConnections = ({ selectedStop }) => {
+export const NextConnections = ({ selectedStop }, { host }) => {
   const [departures, setDepartures] = useState([]);
   const [offset, setOffset] = useState(0);
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const NextConnections = ({ selectedStop }) => {
     const fetchDepartures = async () => {
       try {
         const res = await fetch(
-          `http://localhost:8000/api/departures?stop_name=${encodeURIComponent(
+          `http://${host}:8000/api/departures?stop_name=${encodeURIComponent(
             selectedStop.stop_name
           )}`
         );

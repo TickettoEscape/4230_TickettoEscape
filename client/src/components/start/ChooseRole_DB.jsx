@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
-export const ChooseRole = () => {
+export const ChooseRole = ({ host }) => {
   const navigate = useNavigate();
   const [popupVisible, setPopupVisible] = useState(false);
   const [groupName, setGroupName] = useState("");
@@ -15,7 +15,7 @@ export const ChooseRole = () => {
     const checkRauberStatus = async () => {
       try {
         const res = await fetch(
-          `http://localhost:8000/api/checkRauberRole?game_id=${gameId}`
+          `http://${host}:8000/api/checkRauberRole?game_id=${gameId}`
         );
         const data = await res.json();
         console.log("Räuber check result:", data);
@@ -56,7 +56,7 @@ export const ChooseRole = () => {
 
     console.log("Sending group data to backend:", requestData);
 
-    fetch("http://localhost:8000/api/newGroup", {
+    fetch(`http://${host}ocalhost:8000/api/newGroup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

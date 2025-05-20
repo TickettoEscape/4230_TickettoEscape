@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
-export const CreateGame = () => {
+export const CreateGame = ({ host }) => {
   const navigate = useNavigate();
   const [duration, setDuration] = useState(); // State for game duration
   const [policeCount, setPoliceCount] = useState(); // State for police count
@@ -22,7 +22,7 @@ export const CreateGame = () => {
 
       console.log("Sending JSON to backend:", payload);
 
-      fetch("http://localhost:8000/api/create_game", {
+      fetch(`http://${host}:8000/api/create_game`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

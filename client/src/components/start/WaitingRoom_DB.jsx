@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import logo from "../../data/Logo.png";
 
-export const WaitingRoom = () => {
+export const WaitingRoom = ({ host }) => {
   const navigate = useNavigate();
   const gameId = localStorage.getItem("gameId"); // Get gameId from localStorage
   const [players, setPlayers] = useState([]);
 
   // Function to fetch the players list from the backend
   const fetchPlayers = () => {
-    fetch(`http://localhost:8000/api/waiting?game_id=${gameId}`)
+    fetch(`http://${host}:8000/api/waiting?game_id=${gameId}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

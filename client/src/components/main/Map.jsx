@@ -14,14 +14,16 @@ const customMarker = new L.DivIcon({
   popupAnchor: [0, -20],
 });
 
-export const Map = () => {
+export const Map = ({ host }) => {
   const [locations, setLocations] = useState([]);
 
   const group_id = parseInt(localStorage.getItem("group_id"));
   const game_id = parseInt(localStorage.getItem("gameId"));
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/karte?group_id=${group_id}&game_id=${game_id}`)
+    fetch(
+      `http://${host}:8000/api/karte?group_id=${group_id}&game_id=${game_id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -34,13 +36,13 @@ export const Map = () => {
   }, [group_id, game_id]);
 
   return (
-    <div className="page top-align" >
+    <div className="page top-align">
       <Header />
 
       <div
         style={{
           width: "100%",
-          height:"100%",
+          height: "100%",
           maxWidth: "1000px",
           marginTop: "20px",
           flexGrow: 1,
@@ -51,7 +53,7 @@ export const Map = () => {
       >
         <div
           className="card"
-          style={{ width: "100%",height:"100%", padding: "0",}}
+          style={{ width: "100%", height: "100%", padding: "0" }}
         >
           <div style={{ width: "100%", height: "900px" }}>
             <MapContainer

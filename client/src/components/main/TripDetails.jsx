@@ -5,7 +5,7 @@ import { Footer } from "../Footer";
 import "../../App.css";
 
 // ✅ Custom hook with RouteSpeichern inside
-const useSendTrip = () => {
+const useSendTrip = ({ host }) => {
   const [sendTrip, setSendTrip] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const location = useLocation();
@@ -34,7 +34,7 @@ const useSendTrip = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/history/rout_select",
+        `http://${host}:8000/api/history/rout_select`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ const useSendTrip = () => {
   return { sendTrip, showPopup, handleDecision, setShowPopup };
 };
 
-export const TripDetails = () => {
+export const TripDetails = ({ host }) => {
   const [routeName, setRouteName] = useState("");
   const [headsign, setHeadsign] = useState("");
   const [loading, setLoading] = useState(true);
@@ -94,7 +94,7 @@ export const TripDetails = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/history/rout_select",
+        `http://${host}:8000/api/history/rout_select`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -128,16 +128,13 @@ export const TripDetails = () => {
     console.log("📤 Sending logout payload:", payload);
 
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/history/abmelden",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(`http://${host}:8000/api/history/abmelden`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const data = await response.json();
 
@@ -167,7 +164,7 @@ export const TripDetails = () => {
     const fetchTripDetails = async () => {
       try {
         const res = await fetch(
-          `http://localhost:8000/api/departures_details?trip_id=${tripId}`
+          `http://${host}:8000/api/departures_details?trip_id=${tripId}`
         );
         const data = await res.json();
 
