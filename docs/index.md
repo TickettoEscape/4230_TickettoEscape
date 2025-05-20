@@ -1,11 +1,11 @@
-<!-- <!-- ---
+<!-- <!-- <!-- ---
 layout: default
 title: Ticket to Escape
----
+--- -->
 
 <a id="top"></a>
 
-# Ticket to Escape -->
+# Ticket to Escape
 
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
 
@@ -15,17 +15,6 @@ title: Ticket to Escape
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
 </div>
-
-![Video Ticket to Escape](Videos/Video_Ticket_to_escape_komprimiert.mp4)
-
-<div style="text-align: center; margin: 20px 0;">
-  <video controls style="width: 100%; max-width: 640px; height: auto;">
-    <source src="{{ '/Videos/Video_Ticket_to_escape_komprimiert.mp4' | relative_url }}" type="video/mp4">
-    Dein Browser unterstützt das Video-Tag nicht.
-  </video>
-</div> 
-
-
 
 Das Detektivspiel Scotland Yard oder auch bekannt unter dem Namen Flucht durch die Schweiz oder Mister X wurde von einem Brettspiel in ein Fluchtspiel mit dem SBB-Netz erweitert. Dabei ist eine Räubergruppe mit Vorsprung auf der Flucht und wird von Polizistengruppen verfolgt. Schaffen es die Polizisten vor Ablauf der Zeit die Räuber in einem Zug oder an einem Bahnhof zu fangen, gewinnen sie. 
 
