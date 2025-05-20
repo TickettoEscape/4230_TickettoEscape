@@ -4,9 +4,14 @@
 
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
 
+<<<<<<< Updated upstream
 
 <div style="text-align: center; margin: 20px 0;">
   <video autoplay muted controls style="width: 100%; max-width: 640px; height: auto;">
+=======
+<div style="text-align: center; margin: 20px 0;">
+<video autoplay muted loop playsinline controls style="width: 100%; max-width: 640px; height: auto;">
+>>>>>>> Stashed changes
     <source src="{{ '/Videos/Video_Ticket_to_escape_komprimiert.mp4' | relative_url }}" type="video/mp4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
