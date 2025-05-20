@@ -1,4 +1,4 @@
-# GDI_Project
+# Ticket to Escape
 Server Client Projekt für eine Geodateninfrastruktur Webportal im Rahmen des Moduls 4230
 
 - **Frontend:** React.js, OpenLayers und MUI
