@@ -1,29 +1,29 @@
----
+<!-- <!-- ---
 layout: default
 title: Ticket to Escape
 ---
 
 <a id="top"></a>
 
-# Ticket to Escape
+# Ticket to Escape -->
 
 ***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
 
-<!-- <div style="text-align: center; margin: 20px 0;">
+<div style="text-align: center; margin: 20px 0;">
   <video controls style="width: 100%; max-width: 640px; height: auto;">
-    <source src="{{ '/Videos/Video_Ticket_to_escape.mp4' | relative_url }}" type="video/mp4">
+    <source src="{{ '/Videos/Video_Ticket_to_escape_komprimiert.mp4' | relative_url }}" type="video/mp4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
 </div>
 
-![Video Ticket to Escape](Videos/Video_Ticket_to_escape.mp4) -->
+![Video Ticket to Escape](Videos/Video_Ticket_to_escape_komprimiert.mp4)
 
-<!-- <div style="text-align: center; margin: 20px 0;">
+<div style="text-align: center; margin: 20px 0;">
   <video controls style="width: 100%; max-width: 640px; height: auto;">
-    <source src="{{ '/Videos/Video_Ticket_to_escape.mp4' | relative_url }}" type="video/mp4">
+    <source src="{{ '/Videos/Video_Ticket_to_escape_komprimiert.mp4' | relative_url }}" type="video/mp4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
-</div> -->
+</div> 
 
 
 
