@@ -18,6 +18,7 @@
       }
       .header-content img {
           height: 50px;
+          
       }
       .header-content h2 {
           margin-left: 10px;
@@ -44,17 +45,16 @@
         <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
     </ul>
     {% endif %}
-    <div class="header-content">
-      <img src="{{ '/Bilder/Logo.png' | relative_url }}" alt="Logo" style="height:50px;">
-      <h2 style="margin-left: 10px;">Ticket to Escape</h2>
-    </div>
+    <div class="header-content" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+      <img src="{{ '/Bilder/Logo.png' | relative_url }}" alt="Logo" style="height: 50px;">
+      <h2 style="margin: 0;">Ticket to Escape</h2>
+    </div>    
     <nav>
       <ul>
-
-        <a href="https://tickettoescape.github.io/4230_TickettoEscape/einleitung.html">TickettoEscape</a>
-          <li class="dropdown">
-            <a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html">Erklärung der App Ticket to Escape</a>
-            <div class="dropdown-content">
+        <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/">TickettoEscape</a></li>
+        <li class="dropdown">
+          <a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html">Erklärung der App Ticket to Escape</a>
+          <div class="dropdown-content">
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#spielerstellen">Spiel erstellen</a></div>
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#spielbeitreten">Spiel beitreten</a></div>
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#bahnhofverbindungen">Bahnhof und Verbindungen suchen</a></div>
@@ -63,15 +63,11 @@
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#chat">Chat</a></div>
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#karte">Karte</a></div>
               <div><a href="https://tickettoescape.github.io/4230_TickettoEscape/funktionen.html#informationen">Informationen</a></div>
-            </div>
-          </li>
-          
-
-          <!-- ✅ Fix für Aufbau GDI -->
-          <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/aufbauGDI.html">Aufbau GDI</a></li>
-
-          <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/ausblick.html">Erweiterungsmöglichkeiten</a></li>
-          <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/quellenverzeichnis.html">Quellenverzeichnis</a></li>
+          </div>
+        </li>
+        <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/aufbauGDI.html">Aufbau GDI</a></li>
+        <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/ausblick.html">Erweiterungsmöglichkeiten</a></li>
+        <li><a href="https://tickettoescape.github.io/4230_TickettoEscape/quellenverzeichnis.html">Quellenverzeichnis</a></li>
       </ul>
     </nav>
     <div>
@@ -80,7 +76,6 @@
       {% endif %}
       <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
 
-      <!-- Projektteam direkt darunter, schlicht -->
       <div style="margin-top: 10px;">
         <h4 style="margin-bottom: 5px;">Projektteam</h4>
         <ul style="margin-top: 0;">

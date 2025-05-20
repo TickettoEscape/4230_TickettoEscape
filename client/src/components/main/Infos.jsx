@@ -29,7 +29,7 @@ export const Infos = () => {
       key: "ablauf",
       title: "🔄 Spielablauf",
       content:
-        "• Räuber melden beim Aussteigen den Bahnhof\n• Alle 30 Minuten: Standort & Linienbezeichnung\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
+        "• Räuber melden beim Aussteigen den Bahnhof\n• Polizisten melden jede zweite Linie\n• Polizisten dürfen freiwillige Zusatzinfos geben",
     },
     {
       key: "ende",
@@ -48,6 +48,12 @@ export const Infos = () => {
       title: "📑 Beispiel",
       content:
         "09:27 Anmeldung Bahnhof Aarau\n10:00 Standortmeldung S23\n10:15 Anmeldung Bahnhof Langenthal",
+    },
+        {
+      key: "impressum",
+      title: "Impressum",
+      content:
+        "Entwickler: Aebi Manuel, Fernandes Pereira Vania, Uythoven Sven \nDie Entwickler übernehmen keine Verantwortung für die Aktualität, Korrektheit oder Vollständigkeit der Inhalte der Web App. Es wird keine Gewähr für den Betrieb der Web App übernommen; eine Haftung für Schäden an Hard- oder Software infolge von Viren oder technischen Problemen jeglicher Art ist ausgeschlossen. ",
     },
   ];
 
