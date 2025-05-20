@@ -56,7 +56,7 @@ export const ChooseRole = ({ host }) => {
 
     console.log("Sending group data to backend:", requestData);
 
-    fetch(`http://${host}ocalhost:8000/api/newGroup`, {
+    fetch(`http://${host}:8000/api/newGroup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
