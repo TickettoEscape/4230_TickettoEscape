@@ -1,5 +1,8 @@
 # Ticket to Escape
-Server Client Projekt für eine Geodateninfrastruktur Webportal im Rahmen des Moduls 4230
+***"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."***
+Das Detektivspiel Scotland Yard oder auch bekannt unter dem Namen Flucht durch die Schweiz oder Mister X wurde von einem Brettspiel in ein Fluchtspiel mit dem SBB-Netz erweitert. Dabei ist eine Räubergruppe mit Vorsprung auf der Flucht und wird von Polizistengruppen verfolgt. Schaffen es die Polizisten vor Ablauf der Zeit die Räuber in einem Zug oder an einem Bahnhof zu fangen, gewinnen sie. 
+
+Mit dieser Webapp gelingt es ihnen, durch das SBB-Netz zu flüchten oder den Räubern auf die Schliche zu kommen. Suchen sie ihre nächsten Verbindung und schauen sie wo sich die anderen Gruppen befinden. 
 
 - **Frontend:** React.js, OpenLayers und MUI
 - **Backend:** FastAPI
