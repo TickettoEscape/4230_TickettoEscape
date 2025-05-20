@@ -3,7 +3,7 @@ import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export const NextStation = ({ setSelectedStop }, { host }) => {
+export const NextStation = ({ setSelectedStop, host }) => {
   const [stations, setStations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [stopTimes, setStopTimes] = useState([]);

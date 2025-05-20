@@ -68,7 +68,7 @@ export const TripDetails = ({ host }) => {
   const [searchParams] = useSearchParams();
   const tripId = searchParams.get("tripId");
 
-  const { showPopup, handleDecision, setShowPopup } = useSendTrip();
+  const { showPopup, handleDecision, setShowPopup } = useSendTrip({ host });
 
   useEffect(() => {
     if (localStorage.getItem("role") === "Polizei" && selectedRoute === true) {

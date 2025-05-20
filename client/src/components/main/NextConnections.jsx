@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
-export const NextConnections = ({ selectedStop }, { host }) => {
+export const NextConnections = ({ selectedStop, host }) => {
   const [departures, setDepartures] = useState([]);
   const [offset, setOffset] = useState(0);
   const navigate = useNavigate();

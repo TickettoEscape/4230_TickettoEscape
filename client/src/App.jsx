@@ -36,7 +36,7 @@ function App() {
       <Route path="/map" element={<Map host={host} />} />
       <Route
         path="/startstation"
-        element={<StartStation host={host} setSelectedStop={setSelectedStop} />}
+        element={<StartStation setSelectedStop={setSelectedStop} host={host} />}
       />
       <Route
         path="/connections"
