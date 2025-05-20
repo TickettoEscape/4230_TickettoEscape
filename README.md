@@ -10,7 +10,7 @@ Mit dieser Webapp gelingt es ihnen, durch das SBB-Netz zu flüchten oder den Rä
 
 GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 
-## Projekt Struktur
+## Projektstruktur
 ```bash
 ├───client                 # Frontend-Code
 │    ├───node_modules      # Abhängigkeiten des Frontends (automatisch generiert)
