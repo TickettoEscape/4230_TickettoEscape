@@ -11,17 +11,20 @@ Mit dieser Webapp gelingt es ihnen, durch das SBB-Netz zu flüchten oder den Rä
 GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 
 ## Projekt Struktur
-C:.
-├───client
-│	├───node_modules   
-│	└───public
-│		├───components
-│		│   ├───main
-│		│   └───start
-│		└───data
-├───docs
-├───preprocessing
-└───server
+```bash
+├───client                 # Frontend-Code
+│    ├───node_modules      # Abhängigkeiten des Frontends (automatisch generiert)
+│    ├───public            # Öffentliche statische Ressourcen
+│    └───src               # Hauptkomponenten
+│        ├───components        # Strukturierte React-Komponenten
+│        │    ├───main          # Hauptkomponenten des Interfaces
+│        │    └───start         # Komponenten für das erstellen des Spiels
+│        └───data              # Statische Daten
+├───docs                   # Projektdokumentation
+├───preprocessing          # Skripte zur Datenvorbereitung und -verarbeitung
+└───server                 # Backend-Code und serverseitige Logik
+```
+
 
 ## Requirements
 
