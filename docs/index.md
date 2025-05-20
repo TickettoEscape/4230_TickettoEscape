@@ -26,9 +26,10 @@ title: Ticket to Escape
 </div> -->
 
 
-Im Rahmen des Vertiefungsprofil 4230 Geoinformatik und Raumanalyse I wurde das im Unterricht erlernte Wissen in die Praxis umgesetzt. 
 
 Das Detektivspiel Scotland Yard oder auch bekannt unter dem Namen Flucht durch die Schweiz oder Mister X wurde von einem Brettspiel in ein Fluchtspiel mit dem SBB-Netz erweitert. Dabei ist eine Räubergruppe mit Vorsprung auf der Flucht und wird von Polizistengruppen verfolgt. Schaffen es die Polizisten vor Ablauf der Zeit die Räuber in einem Zug oder an einem Bahnhof zu fangen, gewinnen sie. 
+
+Mit dieser Webapp gelingt es ihnen, durch das SBB-Netz zu flüchten oder den Räubern auf die Schliche zu kommen. Suchen sie ihre nächsten Verbindung und schauen sie wo sich die anderen Gruppen befinden. 
 
 ## Teilnehmer
 Ein Spiel besteht aus einer Räubergruppe und 2–10 Polizistengruppen. Dabei ist die Gruppengrösse frei wählbar, empfohlen wird eine Gruppengrösse von 2–5 Spielenden.
