@@ -25,7 +25,7 @@ app.add_middleware(
 
 # Database connection
 # db_connection_url = "postgresql+psycopg2://postgres:postgres@localhost:5432/ticket_to_escape"
-db_connection_url = "postgresql+psycopg2://postgres:postgres@10.175.14.99:5432/ticket_to_escape"
+db_connection_url = "postgresql+psycopg2://postgres:postgres@10.175.14.99:5432/Ticket_to_Escape"
 engine = create_engine(db_connection_url)
 
 
