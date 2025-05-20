@@ -15,7 +15,7 @@ GitHub Pages: https://tickettoescape.github.io/4230_TickettoEscape/
 ├───client                 # Frontend-Code
 │    ├───node_modules      # Abhängigkeiten des Frontends (automatisch generiert)
 │    ├───public            # Öffentliche statische Ressourcen
-│    └───src               # Hauptkomponenten
+│    └───src               # React Komponenten
 │        ├───components        # Strukturierte React-Komponenten
 │        │    ├───main          # Hauptkomponenten des Interfaces
 │        │    └───start         # Komponenten für das erstellen des Spiels
