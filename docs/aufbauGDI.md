@@ -19,7 +19,7 @@ Die Datenbank ist mit dem GTFS Datensatz der SBB abgefüllt. Die GTFS Daten müs
 
 Die API werden für den Datentrasnfer zwischen Front-/ Backend verwendet. Erfasste/ gewählte Daten werden aus dem Frontend als Payload ins Backend geschickt. Hier werden je nach Endpoint die Daten weiterverarbeitet und in die Datenbank gespielt. Das gleiche geschieht mit Abfragen an die DB.
 
-## API Endpoints Übersicht
+## Endpoints Übersicht
 
 Folgende Endpoints wurden erstellt.
 
