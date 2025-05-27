@@ -18,7 +18,7 @@ import { Chat } from "./components/main/Chat";
 import { Map } from "./components/main/Map";
 
 // const host = "localhost"
-const host = "10.175.14.99";
+const host = "10.175.4.141";
 
 function App() {
   const [selectedStop, setSelectedStop] = useState(null); // Zentraler Zustand für den Bahnhof
