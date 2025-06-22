@@ -95,7 +95,7 @@ im PG Admin neue DB erstellen, Name, User, und Passwort Merken!!
 mit rechtklick auf DB über "restore" diese Datei wählen `Ticket_to_Escape_DB.sql`. 
 
 Name, USER & Passwort in Zeile 27 im File `Daten_Abfrage_API.py` angepassen:
-Zeile 27: db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
+Zeile 27: db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"```
 
 
 # oder
@@ -105,4 +105,4 @@ auf `https://data.opentransportdata.swiss/dataset/timetable-2025-gtfs2020` den a
 
 im output Ordner gibt es nun SQL querys, welche die neuen Daten mit PG Admin in die DB geldaen werden kann.
 
-```
+
