@@ -98,5 +98,11 @@ Name, USER & Passwort in Zeile 27 im File `Daten_Abfrage_API.py` angepassen:
 Zeile 27: db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
 
 
+# oder
+auf `https://data.opentransportdata.swiss/dataset/timetable-2025-gtfs2020` den aktuellen Fahrplan herunterladen und gemäss und Ordner gtfs entzipen (siehe 01_Daten_Filtern.py im preprocessing Ordner für genauen Pfad/ Bennenung)
+01_Daten_Filtern.py ausführen dann
+02_txt2sql.py ausführen
+
+im output Ordner gibt es nun SQL querys, welche die neuen Daten mit PG Admin in die DB geldaen werden kann.
 
 ```
