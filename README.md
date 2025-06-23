@@ -96,7 +96,16 @@ mit rechtklick auf DB über "restore" diese Datei wählen `Ticket_to_Escape_DB.s
 
 Name, USER & Passwort in Zeile 27 im File `Daten_Abfrage_API.py` angepassen:
 Zeile 27: db_connection_url = "postgresql+psycopg2://"USER":"PASSWORT"@localhost:5432/"DM-NAME"
-
-
-
 ```
+
+
+### oder
+1. auf `https://data.opentransportdata.swiss/dataset/timetable-2025-gtfs2020` den aktuellen Fahrplan herunterladen und in Ordner gtfs entzipen (siehe 01_Daten_Filtern.py im preprocessing Ordner für genauen Pfad/ Bennenung)
+2. 01_Daten_Filtern.py ausführen dann
+3. 02_txt2sql.py ausführen
+
+
+
+Im output Ordner gibt es nun SQL-Files welche die Daten in den TXT Filtert und auf die Tabellen der oben aufgelistete DB angepasst sind.
+
+
